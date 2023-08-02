@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HrmszplusApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HrmszplusApplication.class, args); //Added New Comment Please Check
+		SpringApplication.run(HrmszplusApplication.class, args); //Not Required Demo
 	}
 
 }
