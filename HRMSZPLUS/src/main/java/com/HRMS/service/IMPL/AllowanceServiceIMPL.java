@@ -17,26 +17,65 @@ public class AllowanceServiceIMPL implements AllowanceService {
 
 	@Override
 	public List<AllowanceMaster> getAllAllowances() {
+		try {
 			return (List<AllowanceMaster>) allowancedao.findAll();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+			
 
 	}
 
 	@Override
 	public AllowanceMaster saveAllowance(AllowanceMaster allowancemaster) {
-		return allowancedao.save(allowancemaster);
+		
+		AllowanceMaster allowmaster=null;
+		try
+		{
+			allowmaster= allowancedao.save(allowancemaster);
+			return allowmaster;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return allowmaster;
+		}
+		
 
 	}
 
 	@Override
 	public AllowanceMaster findAllowanceById(int id) {
 
-		return allowancedao.findById(id).get();
+		try
+		{
+			return allowancedao.findById(id).get();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
 
 	}
 
 	@Override
 	public AllowanceMaster updateAllowance(AllowanceMaster allowancemaster) {
-		return allowancedao.save(allowancemaster);
+		AllowanceMaster allowmaster=null;
+		try
+		{
+			allowmaster= allowancedao.save(allowancemaster);
+			return allowmaster;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return allowmaster;
+		}
 	}
 
 	@Override
