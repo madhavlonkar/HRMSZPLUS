@@ -19,8 +19,7 @@ public class LoginController {
 	private LoginService loginservice;
 
 	@GetMapping("/login")
-	public String showLoginPage(Model model,HttpSession httpsession) {
-		httpsession.invalidate();
+	public String showLoginPage(Model model) {
 		model.addAttribute("login", new LoginMaster());
 		return "/Login/login";
 	}

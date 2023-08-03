@@ -6,20 +6,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" th:href="@{Login/images/icons/favicon.ico}" />
+	<link rel="icon" type="image/png" href="Login/images/icons/favicon.ico" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="Login/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" href="Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/vendor/animate/animate.css}">
+	<link rel="stylesheet" type="text/css" href="Login/vendor/animate/animate.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/vendor/css-hamburgers/hamburgers.min.css}">
+	<link rel="stylesheet" type="text/css" href="Login/vendor/css-hamburgers/hamburgers.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/vendor/select2/select2.min.css}">
+	<link rel="stylesheet" type="text/css" href="Login/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{Login/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{Login/css/main.css}">
+	<link rel="stylesheet" type="text/css" href="Login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="Login/css/main.css">
 	<!--===============================================================================================-->
 </head>
 
@@ -29,7 +29,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img th:src="@{Login/images/img-01.png}" alt="IMG">
+					<img src="Login/images/img-01.png" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form" th:action="@{/login}" th:object="${login}" method="post">
@@ -112,12 +112,6 @@
 	<!--===============================================================================================-->
 	<script th:src="@{Login/js/main.js}"></script>
 
-	<script th:inline="javascript">
-		// Disable the back button after logout
-		if (window.history.replaceState) {
-			window.history.replaceState(null, null, window.location.href);
-		}
-	</script>
 
 </body>
 
