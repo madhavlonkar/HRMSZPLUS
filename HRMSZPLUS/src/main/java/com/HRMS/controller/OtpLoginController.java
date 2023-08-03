@@ -41,13 +41,14 @@ public class OtpLoginController {
 	}
 
 	@PostMapping("/otp")
-	public String verifyOtp(@ModelAttribute("otp") OtpLoginMaster otploginmaster, Model model, HttpSession session) {
+	public String verifyOtp(@ModelAttribute("otp") OtpLoginMaster otploginmaster, Model model, HttpSession session,HttpSession newsession) {
 		String loggedInUsername = (String) session.getAttribute("loggedInUsername");
 		boolean otpVerified = otploginservice.verifyOtp(loggedInUsername,otploginmaster.getPin());
 		if (otpVerified) {
-			session.invalidate();
 			
-			session.setAttribute("FinalloggedInUsername", loggedInUsername);
+			newsession.setAttribute("otpVerifiedUser", loggedInUsername);
+//			session.invalidate();
+			
 			return "redirect:/allowances";
 		} else {
 			// If the OTP is incorrect, show the error message on the OTP page

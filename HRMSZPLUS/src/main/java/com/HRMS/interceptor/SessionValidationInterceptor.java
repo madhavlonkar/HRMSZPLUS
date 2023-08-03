@@ -1,25 +1,17 @@
 package com.HRMS.interceptor;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.WebRequestInterceptor;
-import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Component
-public class SessionValidationInterceptor extends WebRequestHandlerInterceptorAdapter {
+public class SessionValidationInterceptor implements HandlerInterceptor {
 
-    public SessionValidationInterceptor(WebRequestInterceptor requestInterceptor) {
-		super(requestInterceptor);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        // Check if the session is still valid   FinalloggedInUsername
-        if (request.getSession().getAttribute("FinalloggedInUsername") == null) {
+        // Check if the session is still valid
+        if (request.getSession().getAttribute("otpVerifiedUser") == null) {
             // Session is expired or not present, redirect to the login page
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
