@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.HRMS.model.LoginMaster;
 import com.HRMS.model.OtpLoginMaster;
 import com.HRMS.service.OtpLoginService;
 
@@ -47,9 +46,10 @@ public class OtpLoginController {
 		if (otpVerified) {
 			
 			session.setAttribute("otpVerifiedUser", loggedInUsername);
+			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUser"));
 //			session.invalidate();
 			
-			return "redirect:/allowances";
+			return "redirect:/dashboard";
 		} else {
 			// If the OTP is incorrect, show the error message on the OTP page
 			model.addAttribute("errorMessage", "Incorrect OTP! Please try again.");
