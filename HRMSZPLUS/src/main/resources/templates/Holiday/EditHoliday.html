@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Holiday</title>
+</head>
+<body>
+      <form th:action="@{/holiday/{id}(id=${holiday.holidayId})}" th:object="${holiday}" method = "POST">
+        <label for="holidayId">Holiday ID:</label>
+        <input type="text" id="holidayId" name="holidayId" th:field="*{holidayId}"><br>
+
+        <label for="holidayDate">Holiday Date:</label>
+        <input type="date" id="holidayDate" name="holidayDate" th:field="*{holidayDate}"><br>
+
+        <label for="holidayDescription">Holiday Description:</label>
+        <input type="text" id="holidayDescription" name="holidayDescription" th:field="*{holidayDescription}"><br>
+
+        <button type="submit" value="Submit" >Submit</button>
+        
+        <a th:href="@{/holidays}">Back</a>
+    </form>
+</body>
+</html>
