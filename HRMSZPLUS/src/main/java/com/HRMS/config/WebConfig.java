@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login", "/logout", "/otp") // Exclude specific URLs
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.gif",
-                        "/**/*.svg", "/**/*.ico", "/**/*.woff", "/**/*.woff2","/**/*.ttf"); // Exclude URLs with specific extensions
+                        "/**/*.svg", "/**/*.ico", "/**/*.woff", "/**/*.woff2","/**/*.ttf","/**/*.map"); // Exclude URLs with specific extensions
     }
 
 	@Override
