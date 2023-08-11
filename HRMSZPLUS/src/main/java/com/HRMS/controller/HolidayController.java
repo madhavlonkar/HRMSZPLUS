@@ -81,17 +81,20 @@ public class HolidayController {
 	@PostMapping("/holiday/{id}")
 	public String updateholiday(@PathVariable("id") int id,
 			@ModelAttribute("holiday") HolidayMaster holidaymaster){
+		System.out.print("");
 	
 		try {
 			HolidayMaster existingHoliday = holidayService.findHolidayById(id);
-			
+				
 			if(existingHoliday == null)
 			{
 				log.error("Holiday with id " + id + " not found.");
+				return "redirect:/holidays";
 			}
 			else {
 				holidaymaster.setHolidayId(id); // Set the ID in case it is not provided in the form data
 				holidayService.updateHoliday(holidaymaster);
+				return "redirect:/holidays";
 				
 			}
 		}catch(Exception e)
@@ -101,7 +104,7 @@ public class HolidayController {
 			return "redirect:/holidays";
 		}
 		
-		return "redirect:/holidays";
+		
 	}
 	
 	//For find and deleting specific holiday
