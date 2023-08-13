@@ -3,11 +3,13 @@ package com.HRMS.service.IMPL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.HRMS.dao.DeductionDao;
 import com.HRMS.model.DeductionMaster;
 import com.HRMS.service.DeductionService;
 
+@Service
 public class DeductionServiceIMPL implements DeductionService {
     
 	@Autowired
