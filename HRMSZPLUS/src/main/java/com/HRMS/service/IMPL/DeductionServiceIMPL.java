@@ -28,14 +28,14 @@ public class DeductionServiceIMPL implements DeductionService {
 	}
 
 	@Override
-	public DeductionMaster saveDeduviton(DeductionMaster deductionmaster) {
-		DeductionMaster deductionMaster =null;
+	public DeductionMaster saveDeduciton(DeductionMaster deductionMaster) {
+		DeductionMaster deductionmaster =null;
 		try {
-			deductionMaster = deductionDao.save(deductionMaster);
-			return deductionMaster;
+			deductionmaster = deductionDao.save(deductionMaster);
+			return deductionmaster;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return deductionMaster;
+			return deductionmaster;
 		}
 	}
 

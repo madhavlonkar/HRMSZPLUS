@@ -39,14 +39,14 @@ public class DeductionController {
 	@GetMapping("/deductions/new")
 	public String createDeductionForm(Model model) {
 		model.addAttribute("deduction", new DeductionMaster());
-		return "/Deduction/NewDeduciton";
+		return "/Deduction/NewDeduction";
 		
 	}
 	
 	@PostMapping("/deductions")
 	public String addDeduciton(@ModelAttribute("deduction") DeductionMaster deductionmaster) {
 		
-		DeductionMaster deduction =deductionService.saveDeduviton(deductionmaster);
+		DeductionMaster deduction =deductionService.saveDeduciton(deductionmaster);
 		if(deduction ==null) {
 			logger.error("Unable to Save DATA");
 //			return "redirect:/deductions";
@@ -54,7 +54,7 @@ public class DeductionController {
 		return "redirect:/deductions";
 	}
 	
-	@GetMapping("/deductions/edit/{id}")
+	@GetMapping("/deduction/edit/{id}")
 	public String editDeduciton(@PathVariable("id") int  id, Model model) {
 		DeductionMaster deduction = deductionService.findDeductionById(id);
 		

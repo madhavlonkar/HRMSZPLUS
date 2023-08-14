@@ -9,7 +9,7 @@ public interface DeductionService {
 
 	List<DeductionMaster> getAllDeduction();
 
-	DeductionMaster saveDeduviton(DeductionMaster deductionmaster);
+	DeductionMaster saveDeduciton(DeductionMaster deductionMaster);
 
 	DeductionMaster findDeductionById(int id);
 

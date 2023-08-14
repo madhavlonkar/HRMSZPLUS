@@ -16,7 +16,7 @@ public class DeductionMaster {
 	
 	private String deductionName;
 	
-	private String deductionnDescription;
+	private String deductionDescription;
      
 	
 	
@@ -26,11 +26,11 @@ public class DeductionMaster {
 
 
 
-	public DeductionMaster(int deductionId, String deductionName, String deductionnDescription) {
+	public DeductionMaster(int deductionId, String deductionName, String deductionDescription) {
 		super();
 		this.deductionId = deductionId;
 		this.deductionName = deductionName;
-		this.deductionnDescription = deductionnDescription;
+		this.deductionDescription = deductionDescription;
 	}
 
 
@@ -59,14 +59,14 @@ public class DeductionMaster {
 
 
 
-	public String getDeductionnDescription() {
-		return deductionnDescription;
+	public String getDeductionDescription() {
+		return deductionDescription;
 	}
 
 
 
-	public void setDeductionnDescription(String deductionnDescription) {
-		this.deductionnDescription = deductionnDescription;
+	public void setDeductionDescription(String deductionDescription) {
+		this.deductionDescription = deductionDescription;
 	}
 
 
@@ -74,7 +74,7 @@ public class DeductionMaster {
 	@Override
 	public String toString() {
 		return "DeductionMaster [deductionId=" + deductionId + ", deductionName=" + deductionName
-				+ ", deductionnDescription=" + deductionnDescription + "]";
+				+ ", deductionDescription=" + deductionDescription + "]";
 	}
 	
 	
