@@ -18,7 +18,7 @@ import com.HRMS.service.HolidayService;
 @Controller
 public class HolidayController {
 	
-	private static final Logger log = LoggerFactory.getLogger(HolidayController.class); //log4j
+	private static final Logger log = LoggerFactory.getLogger(HolidayController.class); //log4j aditi push
 
 	@Autowired
 	private HolidayService holidayService;
