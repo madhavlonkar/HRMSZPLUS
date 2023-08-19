@@ -6,13 +6,18 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.HRMS.dao.OtpLoginDAO;
 import com.HRMS.model.OtpLoginMaster;
 import com.HRMS.service.OtpLoginService;
 
 @Service
+@EnableScheduling
+@Transactional
 public class OtpLoginServiceIMPL implements OtpLoginService {
 
 	private static final Logger log = LoggerFactory.getLogger(OtpLoginServiceIMPL.class);
@@ -60,5 +65,12 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 		}
 
 	}
+	
+	@Scheduled(fixedRate = 60000) // Run every 2 minutes (60,000 milliseconds)
+    public void deleteExpiredOtp() {
+        Timestamp cutoffTime = new Timestamp(System.currentTimeMillis() - 300000); // 5 minutes ago
+        otplogindao.deleteExpiredOtpRecords(cutoffTime);
+    }
+
 
 }
