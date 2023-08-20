@@ -51,7 +51,7 @@ public class HolidayController {
 	//For new holidays
 	@PostMapping("/holidays")
 	public String addHoliday(@ModelAttribute("holiday") HolidayMaster holidaymaster) {
-		
+		System.out.print("sssssss"+holidaymaster);
 		HolidayMaster holiday = holidayService.saveHoliday(holidaymaster);
 		if(holiday == null)
 		{
@@ -124,10 +124,10 @@ public class HolidayController {
 		{
 			log.error("Failed to delete holiday with ID" + id,e);
 			e.printStackTrace();
-			return "redirect:/holiday";
+			return "redirect:/holidays";
 		}
 		
-		return "redirect:/holiday";
+		return "redirect:/holidays";
 	}
 	
 	

@@ -32,12 +32,12 @@ public class HolidayServiceIMPL implements HolidayService {
 		HolidayMaster holidmaster = null;
 		
 		try {
-			holidaymaster = holidaydao.save(holidmaster);
+			holidaymaster = holidaydao.save(holidaymaster);
 			return holidmaster;
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-		return null;
+		return holidmaster;
 		}
 	}
 
