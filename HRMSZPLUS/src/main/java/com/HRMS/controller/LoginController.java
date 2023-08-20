@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.HRMS.model.LoginMaster;
 import com.HRMS.service.LoginService;
+import com.HRMS.service.OtpLoginService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,16 +28,29 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginservice;
+	
+	@Autowired
+	private OtpLoginService otploginservice;
 
 	@GetMapping("/login")
-	public String showLoginPage(Model model) {
+	public String showLoginPage(Model model,HttpSession session) {
+		
 		model.addAttribute("login", new LoginMaster());
+		session.invalidate();
 		return "/Login/login";
 	}
 
 	@PostMapping("/login")
 	public String checkLogin(@ModelAttribute("login") LoginMaster loginmaster, Model model, HttpSession session) {
 		LoginMaster checklogin = loginservice.checklogin(loginmaster);
+		
+		if(otploginservice.CheckLockedUser(loginmaster.getUsername()))
+		{
+			model.addAttribute("AccountLocked", "Account Has Been Locked Due To Suspicious Activity");
+			model.addAttribute("login", new LoginMaster());
+		    return "/Login/login";
+		}
+		
 		if (checklogin != null) {
 
 			session.setAttribute("loggedInUsername", checklogin.getUsername());
