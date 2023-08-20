@@ -19,4 +19,10 @@ public interface OtpLoginDAO extends CrudRepository<OtpLoginMaster, Integer>{
 	@Modifying
     @Query("DELETE FROM OtpLoginMaster otp WHERE otp.ts < :cutoffTime")
     void deleteExpiredOtpRecords(@Param("cutoffTime") Timestamp cutoffTime);
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM FailedLoginAttempt acc WHERE acc.ts < :cutoffTime")
+	void deleteLockedAccounts(@Param("cutoffTime") Timestamp cutoffTime);
+
 }
