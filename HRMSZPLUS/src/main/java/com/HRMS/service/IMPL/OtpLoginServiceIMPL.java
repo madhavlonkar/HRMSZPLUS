@@ -66,7 +66,7 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 
 	}
 	
-	@Scheduled(fixedRate = 60000) // Run every 2 minutes (60,000 milliseconds)
+	@Scheduled(fixedRate = 350000) // Run every 5.5 minutes (60,000 milliseconds)
     public void deleteExpiredOtp() {
         Timestamp cutoffTime = new Timestamp(System.currentTimeMillis() - 300000); // 5 minutes ago
         otplogindao.deleteExpiredOtpRecords(cutoffTime);
