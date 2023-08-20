@@ -224,7 +224,7 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="page-header">
-						<h3 class="page-title"> Allowance Maintenance </h3>
+						<h3 class="page-title"> User Maintenance </h3>
 					</div>
 					<div class="row">
 						<div class="col-12 grid-margin">
@@ -235,33 +235,27 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th> Allowance Id </th>
-													<th> Allowance Name </th>
-													<th> Allowance Description </th>
-													<th> View </th>
+													<th> User Id </th>
+													<th> UserName </th>
+													<th> Role</th>
 													<th> Edit </th>
 													<th> Delete </th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="allowance: ${allowances}">
-													<td th:text="${allowance.allowanceId}"></td>
-													<td th:text="${allowance.allowanceName}"></td>
-													<td th:text="${allowance.allowanceDescription}"></td>
-													<td>
-														<a class="btn btn-outline-primary btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/allowances/view/{id}(id=${allowance.allowanceId})}">View</a>
-													</td>
+												<tr th:each="users: ${allUsers}">
+													<td th:text="${users.userId}"></td>
+													<td th:text="${users.username}"></td>
+													<td th:text="${users.role}"></td>
 													<td>
 														<a class="btn btn-outline-success btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/allowances/edit/{id}(id=${allowance.allowanceId})}">Edit</a>
+															th:href="@{/availableUsers/edit/{id}(id=${users.userId})}">Edit</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-danger btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/allowance/{id}(id=${allowance.allowanceId})}">Delete</a>
+															th:href="@{/deleteLogin/{id}(id=${users.userId})}">Delete</a>
 													</td>
 												</tr>
 											</tbody>
@@ -274,8 +268,8 @@
 
 
 						<button type="button" class="btn btn-success btn-fw text-center"
-							style="display: block; margin: 0 auto;" onclick="window.location.href='/allowances/new'">Add
-							Allowances</button>
+							style="display: block; margin: 0 auto;" onclick="window.location.href='/availableUsers/addUser'">Add
+							User</button>
 
 
 

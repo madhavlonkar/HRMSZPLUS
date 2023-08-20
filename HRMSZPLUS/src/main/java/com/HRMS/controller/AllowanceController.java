@@ -21,7 +21,7 @@ public class AllowanceController {
 	private static final Logger logger = LoggerFactory.getLogger(AllowanceController.class);
 
 	@Autowired
-	private AllowanceService allowanceService;
+	private AllowanceService allowanceService; //comment
 
 	@GetMapping("/allowances")
 	public String getAllAllowances(Model model) {

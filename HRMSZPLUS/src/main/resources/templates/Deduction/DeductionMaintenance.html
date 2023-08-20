@@ -210,7 +210,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Holiday Maintenance </h3>
+              <h3 class="page-title"> Deduction Maintenance </h3>
             </div>
             <div class="row">
               <div class="col-12 grid-margin">
@@ -221,27 +221,27 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th> Holiday Id </th>
-                            <th> Holiday Date </th>
-                            <th> Holiday Description </th>
+                            <th> Deduction Id </th>
+                            <th> Deduction Name </th>
+                            <th> Deduction Description </th>
                             <th> View </th>
                             <th> Edit </th>
                             <th> Delete </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="holiday: ${holidays}">
-                            <td th:text="${holiday.holidayId}"></td>
-                            <td th:text="${holiday.holidayDate}"></td>
-                            <td th:text="${holiday.holidayDescription}"></td>
+                          <tr th:each="deduction: ${deduction}">
+                            <td th:text="${deduction.deductionId}"></td>
+                            <td th:text="${deduction.deductionName}"></td>
+                            <td th:text="${deduction.deductionDescription}"></td>
                             <td>
-                              <a class="btn btn-outline-primary btn-fw" style="min-width: 56px;" th:href="@{/holiday/view/{id}(id=${holiday.holidayId})}">View</a>
+                              <a class="btn btn-outline-primary btn-fw" style="min-width: 56px;" th:href="@{/deductions/view/{id}(id=${deduction.deductionId})}">View</a>
                             </td>
                             <td>
-                              <a class="btn btn-outline-success btn-fw" style="min-width: 56px;" th:href="@{/holiday/edit/{id}(id=${holiday.holidayId})}">Edit</a>
+                              <a class="btn btn-outline-success btn-fw" style="min-width: 56px;" th:href="@{/deduction/edit/{id}(id=${deduction.deductionId})}">Edit</a>
                             </td>
                             <td>
-                              <a class="btn btn-outline-danger btn-fw" style="min-width: 56px;" th:href="@{/holiday/{id}(id=${holiday.holidayId})}">Delete</a>
+                              <a class="btn btn-outline-danger btn-fw" style="min-width: 56px;" th:href="@{/deduction/{id}(id=${deduction.deductionId})}">Delete</a>
                             </td>
                           </tr>
                         </tbody>
@@ -250,12 +250,10 @@
                   </div>
                 </div>
               </div>
-              
               <button type="button" class="btn btn-success btn-fw text-center"
-							style="display: block; margin: 0 auto;" onclick="window.location.href='/holidays/new'">Add
-							Holiday</button>
+							style="display: block; margin: 0 auto;" onclick="window.location.href='/deductions/new'">Add
+							Deductions</button>
 
-              
             </div>
           </div>
         </div>
