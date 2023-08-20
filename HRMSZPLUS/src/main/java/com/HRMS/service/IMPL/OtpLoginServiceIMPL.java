@@ -6,6 +6,8 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.HRMS.dao.OtpLoginDAO;
 import com.HRMS.model.OtpLoginMaster;
 import com.HRMS.service.OtpLoginService;
+import com.HRMS.utility.EmailService;
 
 @Service
 @EnableScheduling
@@ -24,6 +27,10 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 
 	@Autowired
 	private OtpLoginDAO otplogindao;
+	
+	@Autowired
+	private EmailService email;
+	
 
 	@Override
 	public boolean isOtpAlreadyPresent(String username) {
@@ -54,6 +61,9 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 
 			Random random = new Random();
 			int pin = random.nextInt(9000) + 1000;
+			
+			email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+			
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 			OtpLoginMaster otp = new OtpLoginMaster();
