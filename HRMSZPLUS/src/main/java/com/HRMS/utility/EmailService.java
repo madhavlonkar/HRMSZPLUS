@@ -26,9 +26,9 @@ public class EmailService{
 			helper.setFrom("nanduchavan2232@gmail.com");
 			helper.setTo(toEmail);
 			helper.setSubject("Login OTP For HRMS System");
-			helper.setText("Please Use This OTP To Get Logged In:" + otp + "\nI will Be Expired Within 5 Min", true); // 'true'
+			helper.setText("Please Use This OTP To Get Logged In: <b>" + otp + "</b> \nI will Be Expired Within 5 Min", true); // 'true'
 																														// enables
-																														// HTML
+																													// HTML
 																														// content
 
 			// Add the attachment
