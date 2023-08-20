@@ -6,4 +6,8 @@ public interface OtpLoginService {
 	public boolean verifyOtp(String username, int enteredOtp);
 	public void generateAndSaveOtp(String username);
 	void deleteExpiredOtp();
+	
+	boolean CheckLockedUser(String username);
+	void recordFailedAttempt(String username);
+	void resetFailedAttemp(String username);
 }

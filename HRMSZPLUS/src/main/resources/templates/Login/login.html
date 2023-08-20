@@ -40,9 +40,15 @@
 					<span class="login200-form-title" th:if="${errorMessage}" role="alert">
 						Incorrect username or password.
 					</span>
+					
+					<span class="login200-form-title" th:if="${AccountLocked}" role="alert">
+						Account Has Been Locked For Detecting Suspicious Activity
+					</span>
+
+
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="txtUser" id="txtUser" placeholder="Username"
-							th:field="*{username}" th:value="${errorMessage == null ? '' : ''}" required>
+							th:field="*{username}" th:value="${errorMessage == null ? '' : null}" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

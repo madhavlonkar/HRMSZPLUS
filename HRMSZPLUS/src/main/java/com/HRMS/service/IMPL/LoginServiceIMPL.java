@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.HRMS.dao.LoginDAO;
 import com.HRMS.model.LoginMaster;
 import com.HRMS.service.LoginService;
+import com.HRMS.service.OtpLoginService;
 
 @Service
 public class LoginServiceIMPL implements LoginService {
@@ -20,6 +21,9 @@ public class LoginServiceIMPL implements LoginService {
 
 	@Autowired
 	private LoginDAO logindao;
+
+	@Autowired
+	private OtpLoginService otploginservice;
 
 	@Override
 	public LoginMaster checklogin(LoginMaster loginmaster) {
@@ -33,12 +37,18 @@ public class LoginServiceIMPL implements LoginService {
 		try {
 			boolean passwordMatches = BCrypt.checkpw(loginmaster.getPassword(), user.getPassword());
 
+			System.out.print("1SSSSSSSSSSSSSSS");
+
 			if (user.getUsername().equals(loginmaster.getUsername())) {
 				if (passwordMatches) {
 
 					return user;
+				} else {
+					otploginservice.recordFailedAttempt(user.getUsername());
+					return null;
 				}
 			} else {
+
 				return null;
 			}
 		} catch (Exception e) {
@@ -47,7 +57,7 @@ public class LoginServiceIMPL implements LoginService {
 			return null;
 		}
 
-		return null;
+//		return null;
 
 	}
 
@@ -90,12 +100,11 @@ public class LoginServiceIMPL implements LoginService {
 	@Override
 	public void updateLogins(LoginMaster loginmaster) {
 		try {
-			
+
 			String hashedPassword = BCrypt.hashpw(loginmaster.getPassword(), BCrypt.gensalt());
 			loginmaster.setPassword(hashedPassword);
 			logindao.save(loginmaster);
 
-	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,12 +112,9 @@ public class LoginServiceIMPL implements LoginService {
 
 	@Override
 	public void deleteUser(int id) {
-		try
-		{
+		try {
 			logindao.deleteById(id);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <title>Corona Admin</title>
     <link rel="stylesheet" href="DashboardC/assets/vendors/mdi/css/materialdesignicons.min.css">
     <!--icons-->
@@ -210,7 +210,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Holiday Maintenance </h3>
+              <h3 class="page-title"> Workday Maintenance </h3>
             </div>
             <div class="row">
               <div class="col-12 grid-margin">
@@ -221,27 +221,29 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th> Holiday Id </th>
-                            <th> Holiday Date </th>
-                            <th> Holiday Description </th>
+                            <th> Workday Id </th>
+                            <th> Year </th>
+                            <th> Month </th>
+                            <th> No. of Days </th>
                             <th> View </th>
                             <th> Edit </th>
                             <th> Delete </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="holiday: ${holidays}">
-                            <td th:text="${holiday.holidayId}"></td>
-                            <td th:text="${holiday.holidayDate}"></td>
-                            <td th:text="${holiday.holidayDescription}"></td>
+                          <tr th:each="workday: ${workdays}">
+                            <td th:text="${workday.workdayId}"></td>
+                            <td th:text="${workday.yearOfWorkday}"></td>
+                            <td th:text="${workday.monthOfWorkday}"></td>
+                             <td th:text="${workday.noOfWorkdays}"></td>
                             <td>
-                              <a class="btn btn-outline-primary btn-fw" style="min-width: 56px;" th:href="@{/holiday/view/{id}(id=${holiday.holidayId})}">View</a>
+                              <a class="btn btn-outline-primary btn-fw" style="min-width: 56px;" th:href="@{/workday/view/{id}(id=${workday.workdayId})}">View</a>
                             </td>
                             <td>
-                              <a class="btn btn-outline-success btn-fw" style="min-width: 56px;" th:href="@{/holiday/edit/{id}(id=${holiday.holidayId})}">Edit</a>
+                              <a class="btn btn-outline-success btn-fw" style="min-width: 56px;" th:href="@{/workday/edit/{id}(id=${workday.workdayId})}">Edit</a>
                             </td>
                             <td>
-                              <a class="btn btn-outline-danger btn-fw" style="min-width: 56px;" th:href="@{/holiday/{id}(id=${holiday.holidayId})}">Delete</a>
+                              <a class="btn btn-outline-danger btn-fw" style="min-width: 56px;" th:href="@{/workday/{id}(id=${workday.workdayId})}">Delete</a>
                             </td>
                           </tr>
                         </tbody>
@@ -250,13 +252,14 @@
                   </div>
                 </div>
               </div>
-              
-              <button type="button" class="btn btn-success btn-fw text-center"
-							style="display: block; margin: 0 auto;" onclick="window.location.href='/holidays/new'">Add
-							Holiday</button>
-
-              
             </div>
+            
+            <form method="GET" th:action="@{/workdays/new}">
+					<div class="p-t-15">
+						<center><button class="btn btn-outline-primary btn-fw" style="min-width: 56px;" type="submit">New Record</button></center>						
+					</div>
+
+				</form>
           </div>
         </div>
       </div>
