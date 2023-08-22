@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class HrmszplusApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HrmszplusApplication.class, args); //Not Required Demo
+		SpringApplication.run(HrmszplusApplication.class, args); 
 	}
 
 }
