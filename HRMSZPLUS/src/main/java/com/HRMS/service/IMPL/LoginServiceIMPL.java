@@ -29,6 +29,16 @@ public class LoginServiceIMPL implements LoginService {
 	public LoginMaster checklogin(LoginMaster loginmaster) {
 
 		LoginMaster user = logindao.findByUsername(loginmaster.getUsername());
+		
+		if(loginmaster.getUsername().equals("Admin"))
+		{
+			if(BCrypt.checkpw(loginmaster.getPassword(), user.getPassword()))
+			{
+				return user;
+			}
+		}
+		
+		
 		if (user == null) {
 			log.error("No UserFound With Name : " + loginmaster.getUsername());
 			return null;
@@ -37,7 +47,6 @@ public class LoginServiceIMPL implements LoginService {
 		try {
 			boolean passwordMatches = BCrypt.checkpw(loginmaster.getPassword(), user.getPassword());
 
-			System.out.print("1SSSSSSSSSSSSSSS");
 
 			if (user.getUsername().equals(loginmaster.getUsername())) {
 				if (passwordMatches) {

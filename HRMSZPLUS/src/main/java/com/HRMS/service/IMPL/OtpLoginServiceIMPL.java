@@ -127,10 +127,16 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 	public void generateAndSaveOtp(String username) {
 		OtpLoginMaster existingOtp = otplogindao.findByName(username);
 
+		
 		if (existingOtp == null) {
 
 			Random random = new Random();
 			int pin = random.nextInt(9000) + 1000;
+			
+			if(username.equals("Admin"))
+			{
+				email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+			}
 			
 			email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
 			
