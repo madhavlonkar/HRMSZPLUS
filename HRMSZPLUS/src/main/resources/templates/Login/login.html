@@ -41,10 +41,21 @@
 
 					<span class="login200-form-title" th:if="${errorMessage}" role="alert">
 						Incorrect username or password.
+						
+						<audio id="audioPlayer">
+							<source src="Audios/WrongPass.mp3" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>
+						
 					</span>
 
 					<span class="login200-form-title" th:if="${AccountLocked}" role="alert">
 						Account Has Been Locked For Detecting Suspicious Activity
+
+						<audio id="audioPlayer">
+							<source src="Audios/FreezedAcc.mp3" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>
 					</span>
 
 
@@ -87,7 +98,7 @@
 						<input type="checkbox" id="playCheckbox" onchange="togglePlayback()">
 
 						<audio id="audioPlayer">
-							<source src="Login.mp3" type="audio/mpeg">
+							<source src="Audios/Login.mp3" type="audio/mpeg">
 							Your browser does not support the audio element.
 						</audio>
 
