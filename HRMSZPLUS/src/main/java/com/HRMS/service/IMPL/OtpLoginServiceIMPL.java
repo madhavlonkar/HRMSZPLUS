@@ -6,8 +6,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -42,23 +40,36 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 	public void recordFailedAttempt(String username) {
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		FailedLoginAttempt attempt=new FailedLoginAttempt();
+		
 		
 		FailedLoginAttempt findByUsername = failedLoginAttemptDAO.findByUsername(username);
 		if(findByUsername!=null)
 		{
+			FailedLoginAttempt attempt=new FailedLoginAttempt();
 			int count=findByUsername.getAttemptCount()+1;
 			attempt.setId(findByUsername.getId());
 			attempt.setUsername(username);
 			attempt.setAttemptCount(count);
 			attempt.setTs(timestamp);
 			
+			
 			if(findByUsername.getAttemptCount()>=4)
 			{
 				attempt.setStatus("Locked");
+				
+				if(findByUsername.getMailSent().equals("NotSent"))
+				{
+					attempt.setMailSent("NotSent");
+				}
+				else
+				{
+					attempt.setMailSent("Sent");
+				}
+				
 			}
 			else
 			{
+				attempt.setMailSent("NotSent");
 				attempt.setStatus("Unlocked");
 			}
 			
@@ -66,11 +77,15 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 		}
 		else
 		{
+			FailedLoginAttempt attempt=new FailedLoginAttempt();
 			attempt.setAttemptCount(1);
-			attempt.setUsername(username);
+			attempt.setMailSent("NotSent");
 			attempt.setStatus("Unlocked");
 			attempt.setTs(timestamp);
+			attempt.setUsername(username);
+			
 			failedLoginAttemptDAO.save(attempt);
+			
 		}
 		
 	}
@@ -95,7 +110,18 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 		{
 			return false;
 		}
-		if(findByUsername.getStatus().equals("Locked"))
+		
+		
+		if(findByUsername.getMailSent().equals("NotSent") && findByUsername.getStatus().equals("Locked") )
+		{
+			email.sendEmailOnSuspiciousActivity("madhavlonkar2@gmail.com");
+			findByUsername.setMailSent("Sent");
+			failedLoginAttemptDAO.save(findByUsername);
+			return true;
+			
+		}
+		
+		else if(findByUsername.getStatus().equals("Locked"))
 		{
 			return true;
 		}

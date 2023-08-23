@@ -21,6 +21,7 @@ public class FailedLoginAttempt {
 	private String username;
 	private int attemptCount;
 	private String status;
+	private String mailSent;
 	
 	@CreationTimestamp
 	private Timestamp ts;
@@ -57,6 +58,14 @@ public class FailedLoginAttempt {
 		this.status = status;
 	}
 
+	public String getMailSent() {
+		return mailSent;
+	}
+
+	public void setMailSent(String mailSent) {
+		this.mailSent = mailSent;
+	}
+
 	public Timestamp getTs() {
 		return ts;
 	}
@@ -65,18 +74,32 @@ public class FailedLoginAttempt {
 		this.ts = ts;
 	}
 
-	public FailedLoginAttempt(Long id, String username, int attemptCount, String status, Timestamp ts) {
+	public FailedLoginAttempt(Long id, String username, int attemptCount, String status, String mailSent,
+			Timestamp ts) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.attemptCount = attemptCount;
 		this.status = status;
+		this.mailSent = mailSent;
 		this.ts = ts;
 	}
 
 	public FailedLoginAttempt() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "FailedLoginAttempt [id=" + id + ", username=" + username + ", attemptCount=" + attemptCount
+				+ ", status=" + status + ", mailSent=" + mailSent + ", ts=" + ts + "]";
+	}
+	
+	
+
+	
+
+	
 
 	
 

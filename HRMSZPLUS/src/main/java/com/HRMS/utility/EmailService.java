@@ -43,4 +43,31 @@ public class EmailService{
 			log.error("Unable to Send Mail");
 		}
 	}
+	
+	
+	public void sendEmailOnSuspiciousActivity(String toEmail) {
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+			helper.setFrom("nanduchavan2232@gmail.com");
+			helper.setTo(toEmail);
+			helper.setSubject("Suspicious activity detected on HRMS system.");
+	        String messageBody = "<p><span style='color: red; font-weight: bold;'>Suspicious activity detected!</span></p>"
+	                + "<p>We hope this message finds you well. We regret to inform you that our security "
+	                + "systems have recently detected some unusual and potentially suspicious "
+	                + "activity associated with your device. Your privacy and security are of utmost importance to us, and we "
+	                + "take these matters very seriously.</p>"
+	                + "<p>Here's a description of what has actually happened...</p>";
+	        helper.setText(messageBody);
+		
+			mailSender.send(message);
+			log.info("Mail Sent Successfully");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Unable to Send Mail");
+		}
+	}
 }
