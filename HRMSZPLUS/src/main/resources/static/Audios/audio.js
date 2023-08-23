@@ -25,3 +25,7 @@ const audioPlayer = document.getElementById('audioPlayer');
             console.error('Autoplay prevented:', error);
         });
     }
+    
+    
+    
+ 
