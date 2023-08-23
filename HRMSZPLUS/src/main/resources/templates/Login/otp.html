@@ -65,26 +65,19 @@
 					</div>
 
 					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
-						<a class="txt2" href="../ForgetPassword/ForgetPassword.html">
-							Username / Password?
-						</a>
-					</div>
-					<div class="text-center p-t-12">
-						<span class="txt1">
-
-						</span>
-
-					</div>
-
-					<div class="text-center p-t-136">
-
-
+						<br>
+						
 						<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-
+						<label for="playCheckbox" class="txt2">Play Audio:</label>
+						<input type="checkbox" id="playCheckbox" onchange="togglePlayback()">
+						
+						<audio id="audioPlayer">
+							<source src="Audios/OTP.mp3" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>
+						
 					</div>
+									
 				</form>
 			</div>
 		</div>
@@ -94,6 +87,7 @@
 
 
 	<!--===============================================================================================-->
+	<script src="Audios/audio.js"></script>
 	<script th:src="@{Login/vendor/jquery/jquery-3.2.1.min.js}"></script>
 	<!--===============================================================================================-->
 	<script th:src="@{Login/vendor/bootstrap/js/popper.js}"></script>
