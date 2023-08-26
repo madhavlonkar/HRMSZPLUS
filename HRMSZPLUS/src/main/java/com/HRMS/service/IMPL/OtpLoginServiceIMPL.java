@@ -163,8 +163,10 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 			{
 				email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
 			}
-			
-			email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+			else
+			{
+				email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+			}
 			
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
