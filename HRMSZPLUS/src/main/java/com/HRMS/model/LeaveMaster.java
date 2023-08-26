@@ -26,6 +26,8 @@ public class LeaveMaster {
 	
 	private Date leaveTo;
 	
+	private int leaveDays;
+	
 	private String leaveDescription;
 	
 	private String leaveStatus;
@@ -70,6 +72,14 @@ public class LeaveMaster {
 		this.leaveTo = leaveTo;
 	}
 
+	public int getLeaveDays() {
+		return leaveDays;
+	}
+
+	public void setLeaveDays(int leaveDays) {
+		this.leaveDays = leaveDays;
+	}
+
 	public String getLeaveDescription() {
 		return leaveDescription;
 	}
@@ -86,7 +96,7 @@ public class LeaveMaster {
 		this.leaveStatus = leaveStatus;
 	}
 
-	public LeaveMaster(int leaveId, int employeeId, String leaveType, Date leaveFrom, Date leaveTo,
+	public LeaveMaster(int leaveId, int employeeId, String leaveType, Date leaveFrom, Date leaveTo, int leaveDays,
 			String leaveDescription, String leaveStatus) {
 		super();
 		this.leaveId = leaveId;
@@ -94,6 +104,7 @@ public class LeaveMaster {
 		this.leaveType = leaveType;
 		this.leaveFrom = leaveFrom;
 		this.leaveTo = leaveTo;
+		this.leaveDays = leaveDays;
 		this.leaveDescription = leaveDescription;
 		this.leaveStatus = leaveStatus;
 	}
@@ -106,9 +117,10 @@ public class LeaveMaster {
 	@Override
 	public String toString() {
 		return "LeaveMaster [leaveId=" + leaveId + ", employeeId=" + employeeId + ", leaveType=" + leaveType
-				+ ", leaveFrom=" + leaveFrom + ", leaveTo=" + leaveTo + ", leaveDescription=" + leaveDescription
-				+ ", leaveStatus=" + leaveStatus + "]";
+				+ ", leaveFrom=" + leaveFrom + ", leaveTo=" + leaveTo + ", leaveDays=" + leaveDays
+				+ ", leaveDescription=" + leaveDescription + ", leaveStatus=" + leaveStatus + "]";
 	}
 
+	
 	
 }

@@ -236,34 +236,36 @@
 											<thead>
 												<tr>
 													<th> Leave Id </th>
-													<th> Leave Type </th>
 													<th> Leave From </th>
 													<th> Leave To </th>
+													<th> Leave Days </th>
 													<th> Leave Description </th>
 													<th> Leave Status </th>
-													<th> Allow </th>
-													<th> Deny </th>
+													<th> Action </th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="leave: ${leaves}">
-													<td th:text="${leave.leaveId}"></td>
-													<td th:text="${leave.leaveType}"></td>
+													<td th:text="${leave.leaveId}"><<td>
+													<!--<td>
+														<select class="form-control" style="color: white;"
+															name="leaveType" id="leaveType">
+															<option value="Paid">Paid</option>
+															<option value="Un-Paid">Un-Paid</option>
+														</select>
+													</td> -->
 													<td th:text="${leave.leaveFrom}"></td>
 													<td th:text="${leave.leaveTo}"></td>
+													<td th:text="${leave.leaveDays}"></td>
+
 													<td th:text="${leave.leaveDescription}"></td>
 													<td th:text="${leave.leaveStatus}"></td>
 													<td>
-														<a class="btn btn-outline-primary btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/l/view/{id}(id=${leave.leaveId})}">Allow</a>
-													</td>
-													<td>
 														<a class="btn btn-outline-success btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/allowances/edit/{id}(id=${leave.leaveId})}">Deny</a>
+															th:href="@{/leaves/edit/{id}(id=${leave.leaveId})}">Action</a>
 													</td>
-												
+
 												</tr>
 											</tbody>
 										</table>
@@ -285,6 +287,18 @@
 
 			</div>
 		</div>
+
+		<script>
+			function allowLeave(leaveId) {
+				var selectedLeaveType = document.getElementById('leaveType').value;
+				window.location.href = '/leaves/allow/' + leaveId + '?leaveType=' + selectedLeaveType;
+			}
+
+			function denyLeave(leaveId) {
+				var selectedLeaveType = document.getElementById('leaveType').value;
+				window.location.href = '/leaves/deny/' + leaveId + '?leaveType=' + selectedLeaveType;
+			}
+		</script>
 		<script src="/DashboardC/assets/vendors/js/vendor.bundle.base.js"></script>
 		<script src="/DashboardC/assets/js/off-canvas.js"></script>
 		<script src="/DashboardC/assets/js/hoverable-collapse.js"></script>

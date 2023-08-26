@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.HRMS.model.LeaveMaster;
 import com.HRMS.service.LeaveService;
@@ -72,11 +73,11 @@ public class LeaveController {
 		if(leave == null)
 		{
 			Log.error("Allowance with ID " + id + " not found.");
-			return "redirect:/leaves";
+			return "redirect:/leaveMaintenance";
 		}
-		
 		model.addAttribute("leaves" , leave);
-		return "/Leave/EditLeave";
+		
+		return "Leave/viewLeave";
 	}
 	
 	@PostMapping("/leave/{id}")
@@ -122,6 +123,30 @@ public class LeaveController {
 
 		return "redirect:/leaves";
 	}
+	
+	
+	@PostMapping("/leaves/allow/{id}")
+	public String allowLeave(@PathVariable("id") int leaveId,
+	                         @RequestParam("leaveType") String leaveType) {
+	    LeaveMaster leave = leaveService.findLeaveById(leaveId);
+
+	    System.out.print("SSSSSSSSSSSSSSSSSSSSSSSSSs:"+leaveType);
+	    if (leave != null) {
+	        leave.setLeaveStatus("Allowed");
+	        leave.setLeaveType(leaveType);
+	        leaveService.updateLeave(leave);
+
+	        // Use the 'leaveType' value as needed
+	    } else {
+	        Log.error("Leave with ID " + leaveId + " not found.");
+	    }
+
+	    return "redirect:/leaves"; // Redirect back to the leave maintenance page
+	}
+
+
+
+	
 
 }
 

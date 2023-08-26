@@ -74,7 +74,7 @@ public class LeaveServiceIMPL implements LeaveService{
 			leavedao.deleteById(id);
 		}catch(Exception e)
 		{
-			throw new RuntimeException("Failed to delete holiday. Please try again later.");
+			throw new RuntimeException("Failed to delete leave. Please try again later.");
 		}
 			
 	}
