@@ -77,7 +77,7 @@ public class LeaveController {
 		}
 		model.addAttribute("leaves" , leave);
 		
-		return "Leave/viewLeave";
+		return "Leave/LeaveMaintenanceAction";
 	}
 	
 	@PostMapping("/leave/{id}")

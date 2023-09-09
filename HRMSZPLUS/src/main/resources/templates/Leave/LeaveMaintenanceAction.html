@@ -14,14 +14,13 @@
 			/* Text color when focused */
 		}
 	</style>
-	
+
 	<style>
-        .read-only-input {
-            background-color: #f8f9fa;
-            color: #495057;
-            border: 1px solid #ced4da;
-        }
-    </style>
+		.form-control[readonly] {
+			background-color: #2A3038;
+			opacity: 1;
+		}
+	</style>
 </head>
 
 <body>
@@ -244,7 +243,7 @@
 													<label class="col-sm-3 col-form-label">leave Id</label>
 													<div class="col-sm-9">
 														<input type="text" name="LeaveId" id="LeaveId"
-															class="form-control" th:field="*{leaveId}" />
+															class="form-control" th:field="*{leaveId}" readonly />
 													</div>
 												</div>
 											</div>
@@ -254,7 +253,7 @@
 													<label class="col-sm-3 col-form-label">Employee Id</label>
 													<div class="col-sm-9">
 														<input type="text" name="EmployeeId" id="EmployeeId"
-															class="form-control" th:field="*{employeeId}" />
+															class="form-control" th:field="*{employeeId}" readonly />
 													</div>
 												</div>
 											</div>
@@ -264,17 +263,17 @@
 													<label class="col-sm-3 col-form-label">leave From</label>
 													<div class="col-sm-9">
 														<input type="date" name="leaveFrom" id="leaveFrom"
-															class="form-control" th:field="*{leaveFrom}" />
+															class="form-control" th:field="*{leaveFrom}" readonly />
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">leave Name</label>
+													<label class="col-sm-3 col-form-label">leave To</label>
 													<div class="col-sm-9">
 														<input type="date" name="LeaveTo" id="LeaveTo"
-															class="form-control" th:field="*{leaveTo}" />
+															class="form-control" th:field="*{leaveTo}" readonly/>
 													</div>
 												</div>
 											</div>
@@ -299,19 +298,21 @@
 													<label class="col-sm-3 col-form-label">leave Description</label>
 													<div class="col-sm-9">
 														<input type="text" name="LeaveDescription" id="LeaveDescription"
-															class="form-control" th:field="*{leaveDescription}" />
+															class="form-control" th:field="*{leaveDescription}" readonly/>
 													</div>
 												</div>
 											</div>
 
-										<div class="col-md-6">
+											<div class="col-md-6">
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Leave Days</label>
 													<div class="col-sm-9">
-													<!--	<input type="text" name="LeaveDays" id="LeaveDays"
+														<!--	<input type="text" name="LeaveDays" id="LeaveDays"
 															class="form-control" th:field="*{leaveDays}"
 															readonly="readonly" />-->
-															<input type="text" name="LeaveDays" id="LeaveDays" class="form-control read-only-input" th:field="*{leaveDays}" readonly="readonly" />
+														<input type="text" name="LeaveDays" id="LeaveDays"
+															class="form-control read-only-input" th:field="*{leaveDays}"
+															readonly />
 
 													</div>
 												</div>
