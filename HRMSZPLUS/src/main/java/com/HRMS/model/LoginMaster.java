@@ -15,6 +15,7 @@ public class LoginMaster {
 	private String username;
 	private String password;
 	private String role;
+	private String email;
 	public int getUserId() {
 		return userId;
 	}
@@ -39,16 +40,26 @@ public class LoginMaster {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public LoginMaster(int userId, String username, String password, String role) {
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public LoginMaster(int userId, String username, String password, String role, String email) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.email = email;
 	}
 	public LoginMaster() {
 		super();
 	}
+	
+	
+	
 
 	
 }

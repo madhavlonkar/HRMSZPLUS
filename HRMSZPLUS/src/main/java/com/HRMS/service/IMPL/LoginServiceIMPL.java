@@ -75,7 +75,7 @@ public class LoginServiceIMPL implements LoginService {
 
 		try {
 			loginmaster.setUserId(2);
-
+			loginmaster.setEmail("madhavlonkar2@gmail.com");
 			String hashedPassword = BCrypt.hashpw(loginmaster.getPassword(), BCrypt.gensalt());
 			loginmaster.setPassword(hashedPassword);
 			logindao.save(loginmaster);
