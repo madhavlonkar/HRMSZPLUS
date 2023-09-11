@@ -10,6 +10,9 @@ public interface LoginService {
 	boolean newUser(LoginMaster loginmaster);
 	LoginMaster findUserLoginsById(int id);
 	
+	LoginMaster findByUsername(String username);
+
+	
 	LoginMaster checklogin(LoginMaster loginmaster);
 	void updateLogins(LoginMaster loginmaster);
 	void deleteUser(int id);

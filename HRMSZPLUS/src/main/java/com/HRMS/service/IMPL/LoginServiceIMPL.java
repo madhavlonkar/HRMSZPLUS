@@ -128,4 +128,15 @@ public class LoginServiceIMPL implements LoginService {
 		}
 	}
 
+	@Override
+	public LoginMaster findByUsername(String username) {
+	    try {
+	        return logindao.findByUsername(username);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // You might want to handle the exception here, perhaps by logging or throwing a custom exception
+	        throw new RuntimeException("Error while finding user by username: " + e.getMessage(), e);
+	    }
+	}
+
 }

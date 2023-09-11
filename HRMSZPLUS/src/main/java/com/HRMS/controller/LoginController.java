@@ -38,7 +38,7 @@ public class LoginController {
 		session.invalidate();
 		return "/Login/login";
 	}
-
+			
 	@PostMapping("/login")
 	public String checkLogin(@ModelAttribute("login") LoginMaster loginmaster, Model model, HttpSession session) {
 		LoginMaster checklogin = loginservice.checklogin(loginmaster);

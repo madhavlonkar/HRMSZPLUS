@@ -35,7 +35,7 @@ public class EmailService{
 //            File attachment = new File(attachmentPath);
 //            helper.addAttachment(attachment.getName(), attachment);
 
-			mailSender.send(message);
+			//mailSender.send(message);
 			log.info("Mail Sent Successfully");
 
 		} catch (Exception e) {
