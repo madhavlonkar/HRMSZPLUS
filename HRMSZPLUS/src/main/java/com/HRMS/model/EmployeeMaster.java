@@ -32,9 +32,11 @@ public class EmployeeMaster {
 	private DepartmentMaster empDepartment;
 	
 	@ManyToOne
+	@JoinColumn(name="designationID")
 	private DesignationMaster empDesignation;
 	
 	@ManyToOne
+	@JoinColumn(name="bankId")
 	private BankMaster empBank;
 
 	public int getEmpId() {
