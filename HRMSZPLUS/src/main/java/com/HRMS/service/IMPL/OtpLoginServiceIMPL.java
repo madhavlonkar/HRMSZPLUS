@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.HRMS.dao.FailedLoginAttemptDAO;
+import com.HRMS.dao.LoginDAO;
 import com.HRMS.dao.OtpLoginDAO;
 import com.HRMS.model.FailedLoginAttempt;
+import com.HRMS.model.LoginMaster;
 import com.HRMS.model.OtpLoginMaster;
 import com.HRMS.service.OtpLoginService;
 import com.HRMS.utility.EmailService;
@@ -34,7 +36,10 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 	@Autowired
 	private EmailService email;
 	
-
+	@Autowired
+	private LoginDAO logindao;
+	
+	
 	
 	@Override
 	public void recordFailedAttempt(String username) {
@@ -155,6 +160,8 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 
 		
 		if (existingOtp == null) {
+			
+			LoginMaster l=logindao.findByUsername(username);
 
 			Random random = new Random();
 			int pin = random.nextInt(9000) + 1000;
@@ -165,7 +172,7 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 			}
 			else
 			{
-				email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+				email.sendEmailWithOtp(l.getEmail(), pin);
 			}
 			
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());

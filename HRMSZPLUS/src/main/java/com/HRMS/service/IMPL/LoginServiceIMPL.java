@@ -75,7 +75,7 @@ public class LoginServiceIMPL implements LoginService {
 
 		try {
 			loginmaster.setUserId(2);
-
+			loginmaster.setEmail("madhavlonkar2@gmail.com");
 			String hashedPassword = BCrypt.hashpw(loginmaster.getPassword(), BCrypt.gensalt());
 			loginmaster.setPassword(hashedPassword);
 			logindao.save(loginmaster);
@@ -126,6 +126,17 @@ public class LoginServiceIMPL implements LoginService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public LoginMaster findByUsername(String username) {
+	    try {
+	        return logindao.findByUsername(username);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // You might want to handle the exception here, perhaps by logging or throwing a custom exception
+	        throw new RuntimeException("Error while finding user by username: " + e.getMessage(), e);
+	    }
 	}
 
 }

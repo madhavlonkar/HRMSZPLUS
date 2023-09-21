@@ -243,13 +243,13 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="page-header">
-						<h3 class="page-title"> Allowance Maintenance </h3>
+						<h3 class="page-title"> Add Deisgnation</h3>
 					</div>
 					<div class="row">
 					<div class="col-12 grid-margin">
 						<div class="card">
 							<div class="card-body">
-								<form class="form-sample" th:action="@{/allowances}" th:object="${allowance}"
+								<form class="form-sample" th:action="@{/designation}" th:object="${designation}"
 									method="POST">
 
 
@@ -257,10 +257,10 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group row">
-												<label class="col-sm-3 col-form-label">Allowance Name</label>
+												<label class="col-sm-3 col-form-label">Deisgnation Name</label>
 												<div class="col-sm-9">
-													<input type="text" name="AllowanceName" id="AllowanceName"
-														class="form-control" th:field="*{allowanceName}" />
+													<input type="text" name="designationName" id="designationName"
+														class="form-control" th:field="*{designationName}" />
 												</div>
 											</div>
 										</div>
@@ -269,8 +269,8 @@
 											<div class="form-group row">
 												<label class="col-sm-3 col-form-label">Description</label>
 												<div class="col-sm-9">
-													<input type="text" class="form-control" name="AllowanceDescription"
-														id="AllowanceDescription" th:field="*{allowanceDescription}" />
+													<input type="text" class="form-control" name="designationDescription"
+														id="designationDescription" th:field="*{designationDescription}" />
 												</div>
 											</div>
 										</div>
@@ -281,7 +281,7 @@
 										
 										<!-- Add multiple non-breaking spaces to create space between the buttons -->
 										<button type="button" class="btn btn-primary btn-rounded btn-fw"
-											onclick="window.location.href='/allowances'">Back</button>
+											onclick="window.location.href='/designations'">Back</button>
 									</center>
 								</form>
 							</div>
