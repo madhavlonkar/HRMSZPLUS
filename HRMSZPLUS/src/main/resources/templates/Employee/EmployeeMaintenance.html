@@ -242,7 +242,7 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="page-header">
-						<h3 class="page-title"> Desigantion Maintenance </h3>
+						<h3 class="page-title"> Employee Maintenance </h3>
 					</div>
 					<div class="row">
 						<div class="col-12 grid-margin">
@@ -253,33 +253,35 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th> Designation Id </th>
-													<th> Designation Name </th>
-													<th> Designation Description </th>
+													<th> Employee Id </th>
+													<th> Employee Name </th>
+													<th> Employee State </th>
+													<th> Employee Email </th>
 													<th> View </th>
 													<th> Edit </th>
 													<th> Delete </th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="designation: ${designations}">
-													<td th:text="${designation.designationId}"></td>
-													<td th:text="${designation.designationName}"></td>
-													<td th:text="${designation.designationDescription}"></td>
+												<tr th:each="employee: ${employees}">
+													<td th:text="${employee.empId}"></td>
+													<td th:text="${employee.empName}"></td>
+													<td th:text="${employee.empState}"></td>
+													<td th:text="${employee.empEmail}"></td>
 													<td>
 														<a class="btn btn-outline-primary btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/allowances/view/{id}(id=${designation.designationId})}">View</a>
+															th:href="@{/allowances/view/{id}(id=${employee.empId})}">View</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-success btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/designation/edit/{id}(id=${designation.designationId})}">Edit</a>
+															th:href="@{/allowances/edit/{id}(id=${employee.empId})}">Edit</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-danger btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/designation/delete/{id}(id=${designation.designationId})}">Delete</a>
+															th:href="@{/employee/delete/{id}(id=${employee.empId})}">Delete</a>
 													</td>
 												</tr>
 											</tbody>
@@ -292,8 +294,8 @@
 
 
 						<button type="button" class="btn btn-success btn-fw text-center"
-							style="display: block; margin: 0 auto;" onclick="window.location.href='/designation/new'">Add
-							Designation</button>
+							style="display: block; margin: 0 auto;" onclick="window.location.href='/allowances/new'">Add
+							Allowances</button>
 
 
 
