@@ -47,7 +47,6 @@ public class AllowanceController {
 		AllowanceMaster allowance = allowanceService.saveAllowance(allowancemaster);
 		if (allowance == null) {
 			logger.error("Unable to Save Data");
-			return "redirect:/allowances";
 		}
 
 		return "redirect:/allowances";
@@ -84,7 +83,6 @@ public class AllowanceController {
 		} catch (Exception e) {
 			logger.error("Failed to update allowance with ID " + id, e);
 			e.printStackTrace();
-			return "redirect:/allowances";
 		}
 
 		return "redirect:/allowances";
@@ -103,7 +101,6 @@ public class AllowanceController {
 		} catch (Exception e) {
 			logger.error("Failed to delete allowance with ID " + id, e);
 			e.printStackTrace();
-			return "redirect:/allowances";
 		}
 
 		return "redirect:/allowances";

@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.HRMS.model.BankMaster;
 import com.HRMS.model.DepartmentMaster;
+import com.HRMS.model.DesignationMaster;
 import com.HRMS.model.EmployeeMaster;
+import com.HRMS.service.BankService;
 import com.HRMS.service.DepartmentService;
+import com.HRMS.service.DesignationService;
 import com.HRMS.service.EmployeeService;
 
 @Controller
@@ -25,6 +29,12 @@ public class EmployeeController {
 	
 	@Autowired
 	private DepartmentService departmentservice;
+	
+	@Autowired
+	private DesignationService designationservice;
+	
+	@Autowired
+	private BankService bankservice;
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
@@ -49,9 +59,17 @@ public class EmployeeController {
 	@GetMapping("/employee/new")
 	public String createNewForm(Model model)
 	{
+		List<EmployeeMaster> allEmployees = employeeservice.getAllEmployees();
 		List<DepartmentMaster> allDepartments = departmentservice.findAllDepartments();
+		List<DesignationMaster> allDesignations = designationservice.findAllDesignations();
+		List<BankMaster> allBanks = bankservice.findAllBanks();
+		
+		model.addAttribute("allEmployees",allEmployees);
+		model.addAttribute("allDepartments",allDepartments);
+		model.addAttribute("allDesignations",allDesignations);
+		model.addAttribute("allbanks",allBanks);
 		model.addAttribute("employee",new EmployeeMaster());
-		model.addAttribute("departments",allDepartments);
+		
 		return "Employee/newEmployee";
 	}
 	
