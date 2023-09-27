@@ -1,6 +1,5 @@
 package com.HRMS.model;
 
-import java.sql.Blob;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
@@ -9,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -70,18 +68,17 @@ public class EmployeeMaster {
     @JoinColumn(name="refemp_id")
     private EmployeeMaster reference;
     
-    @Lob
-    @Column(name = "resumeData")
-    private Blob resumeData;
+    @Column(name = "resume_path")
+    private String resumePath;
+
     
-    @Lob
-    @Column(name = "profileImageData")
-    private Blob profileImageData;
+    @Column(name = "profileImage_path")
+    private String profileImageData;
     
-    private boolean employmentEligibilityVerification;
-    private boolean ndaConsent;
-    private boolean criminalBackgroundCheckConsent;
-    private boolean drugTestingConsent;
+    private String employmentEligibilityVerification;
+    private String ndaConsent;
+    private String criminalBackgroundCheckConsent;
+    private String drugTestingConsent;
 	public long getEmpId() {
 		return empId;
 	}
@@ -244,40 +241,40 @@ public class EmployeeMaster {
 	public void setReference(EmployeeMaster reference) {
 		this.reference = reference;
 	}
-	public Blob getResumeData() {
-		return resumeData;
+	public String getResumePath() {
+		return resumePath;
 	}
-	public void setResumeData(Blob resumeData) {
-		this.resumeData = resumeData;
+	public void setResumePath(String resumePath) {
+		this.resumePath = resumePath;
 	}
-	public Blob getProfileImageData() {
+	public String getProfileImageData() {
 		return profileImageData;
 	}
-	public void setProfileImageData(Blob profileImageData) {
+	public void setProfileImageData(String profileImageData) {
 		this.profileImageData = profileImageData;
 	}
-	public boolean isEmploymentEligibilityVerification() {
+	public String getEmploymentEligibilityVerification() {
 		return employmentEligibilityVerification;
 	}
-	public void setEmploymentEligibilityVerification(boolean employmentEligibilityVerification) {
+	public void setEmploymentEligibilityVerification(String employmentEligibilityVerification) {
 		this.employmentEligibilityVerification = employmentEligibilityVerification;
 	}
-	public boolean isNdaConsent() {
+	public String getNdaConsent() {
 		return ndaConsent;
 	}
-	public void setNdaConsent(boolean ndaConsent) {
+	public void setNdaConsent(String ndaConsent) {
 		this.ndaConsent = ndaConsent;
 	}
-	public boolean isCriminalBackgroundCheckConsent() {
+	public String getCriminalBackgroundCheckConsent() {
 		return criminalBackgroundCheckConsent;
 	}
-	public void setCriminalBackgroundCheckConsent(boolean criminalBackgroundCheckConsent) {
+	public void setCriminalBackgroundCheckConsent(String criminalBackgroundCheckConsent) {
 		this.criminalBackgroundCheckConsent = criminalBackgroundCheckConsent;
 	}
-	public boolean isDrugTestingConsent() {
+	public String getDrugTestingConsent() {
 		return drugTestingConsent;
 	}
-	public void setDrugTestingConsent(boolean drugTestingConsent) {
+	public void setDrugTestingConsent(String drugTestingConsent) {
 		this.drugTestingConsent = drugTestingConsent;
 	}
 	public EmployeeMaster(long empId, String empName, String currentAddress, String permanentAddress, Date dateOfBirth,
@@ -286,8 +283,9 @@ public class EmployeeMaster {
 			String employmentType, BankMaster bank, String bankAccountNumber, String bankIFSC, String highestEducation,
 			String collegeUniversityName, String areaOfStudy, Date dateOfGraduation, String emergencyContactName,
 			String emergencyContactRelation, String emergencyContactAddress, String emergencyContactContact,
-			EmployeeMaster reference, Blob resumeData, Blob profileImageData, boolean employmentEligibilityVerification,
-			boolean ndaConsent, boolean criminalBackgroundCheckConsent, boolean drugTestingConsent) {
+			EmployeeMaster reference, String resumePath, String profileImageData,
+			String employmentEligibilityVerification, String ndaConsent, String criminalBackgroundCheckConsent,
+			String drugTestingConsent) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
@@ -316,7 +314,7 @@ public class EmployeeMaster {
 		this.emergencyContactAddress = emergencyContactAddress;
 		this.emergencyContactContact = emergencyContactContact;
 		this.reference = reference;
-		this.resumeData = resumeData;
+		this.resumePath = resumePath;
 		this.profileImageData = profileImageData;
 		this.employmentEligibilityVerification = employmentEligibilityVerification;
 		this.ndaConsent = ndaConsent;
@@ -326,5 +324,9 @@ public class EmployeeMaster {
 	public EmployeeMaster() {
 		super();
 	}
+	
+    
+    
+	
 	
 }
