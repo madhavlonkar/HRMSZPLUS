@@ -1,5 +1,6 @@
 package com.HRMS.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,13 +39,14 @@ public class WorkdayController {
 	}
 	
 	@GetMapping("/workdays/new")
-	public String createWorkdayForm(Model model)
-	{
-		model.addAttribute("workday", new WorkdayMaster());
-		
-		return "/Workday/NewWorkday";
-         
+	public String createWorkdayForm(Model model) {
+	    model.addAttribute("workday", new WorkdayMaster());
+	    
+	    List<String> years = Arrays.asList("2023", "2024", "2025"); // Add your list of years here
+	    model.addAttribute("years", years);
+	    return "Workday/NewWorkday";
 	}
+
 	
 	
 	
@@ -123,10 +125,10 @@ public class WorkdayController {
 		{
 			log.error("Failed to delete workday with ID" + id,e);
 			e.printStackTrace();
-			return "redirect:/workday";
+			return "redirect:/workdays";
 		}
 		
-		return "redirect:/workday";
+		return "redirect:/workdays";
 	}
 	
 	
