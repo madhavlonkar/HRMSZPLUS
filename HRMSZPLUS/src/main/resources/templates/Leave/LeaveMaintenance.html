@@ -238,7 +238,6 @@
 													<th> Leave Id </th>
 													<th> Leave From </th>
 													<th> Leave To </th>
-													<th> Leave Days </th>
 													<th> Leave Description </th>
 													<th> Leave Status </th>
 													<th> Action </th>
@@ -247,16 +246,9 @@
 											<tbody>
 												<tr th:each="leave: ${leaves}">
 													<td th:text="${leave.leaveId}"><<td>
-													<!--<td>
-														<select class="form-control" style="color: white;"
-															name="leaveType" id="leaveType">
-															<option value="Paid">Paid</option>
-															<option value="Un-Paid">Un-Paid</option>
-														</select>
-													</td> -->
+												
 													<td th:text="${leave.leaveFrom}"></td>
 													<td th:text="${leave.leaveTo}"></td>
-													<td th:text="${leave.leaveDays}"></td>
 
 													<td th:text="${leave.leaveDescription}"></td>
 													<td th:text="${leave.leaveStatus}"></td>
