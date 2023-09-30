@@ -48,21 +48,23 @@ public class LeaveController {
 	@GetMapping("/leaves/new")
 	public String createLeaveForm(Model model)
 	{
-		model.addAttribute("leave" , new LeaveMaster());
-		return "/Leave/NewLeave";
+		LeaveMaster l=new LeaveMaster();
+		l.setEmployeeId(1);
+		model.addAttribute("leave",l);
+		return "/Leave/LeaveApply";
 	}
 	
 	@PostMapping("/leaves")
 	public String addLeaves(@ModelAttribute("leave") LeaveMaster leavemaster) {
-		
+		leavemaster.setLeaveStatus("pending");
 		LeaveMaster leave = leaveService.saveLeave(leavemaster);
 		if(leave == null)
 		{
 			Log.error("Unable to save data");
-			return "redirect:/leave";
+			return "redirect:/leaves";
 		}
 		
-		return "redirect:/leave";
+		return "redirect:/leaves";
 	}
 	
 	@GetMapping("leaves/edit/{id}")
@@ -130,7 +132,6 @@ public class LeaveController {
 	                         @RequestParam("leaveType") String leaveType) {
 	    LeaveMaster leave = leaveService.findLeaveById(leaveId);
 
-	    System.out.print("SSSSSSSSSSSSSSSSSSSSSSSSSs:"+leaveType);
 	    if (leave != null) {
 	        leave.setLeaveStatus("Allowed");
 	        leave.setLeaveType(leaveType);
@@ -149,4 +150,3 @@ public class LeaveController {
 	
 
 }
-
