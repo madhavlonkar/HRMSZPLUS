@@ -15,5 +15,7 @@ public interface WorkdayService {
 	WorkdayMaster updateWorkday(WorkdayMaster workdaymaster);
 
 	void deleteWorkday(int id);
+	
+	List<WorkdayMaster> findByYear(int year);
 
 }

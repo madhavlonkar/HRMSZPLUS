@@ -250,7 +250,8 @@
 							<div class="card">
 								<div class="card-body">
 									<form class="form-sample" th:action="@{/workdays}" th:object="${workday}"
-										method="POST">
+										method="POST" id="dayForm">
+
 
 
 
@@ -258,40 +259,37 @@
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Workday Month</label>
-													<div class="col-sm-9">
-														<select name="monthOfWorkday" id="monthOfWorkday"
-															class="form-control" th:field="*{monthOfWorkday}"
-															style="color: white;">
-															<option value="">Select a Month</option>
-															<option value="01">January</option>
-															<option value="02">February</option>
-															<option value="03">March</option>
-															<option value="04">April</option>
-															<option value="05">May</option>
-															<option value="06">June</option>
-															<option value="07">July</option>
-															<option value="08">August</option>
-															<option value="09">September</option>
-															<option value="10">October</option>
-															<option value="11">November</option>
-															<option value="12">December</option>
-														</select>
-													</div>
-												</div>
-											</div>
-
-
-											<div class="col-md-6">
-												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Workdays Year</label>
 													<div class="col-sm-9">
-														<select name="yearOfWorkday" id="yearOfWorkday"
-															class="form-control" th:field="*{yearOfWorkday}"
-															style="color: white;">
-															<option value="0">Select a Year</option>
-															<option th:each="year : ${years}" th:value="${year}"
-																th:text="${year}"></option>
+														<select name="year" id="year" th:field="*{yearOfWorkday}"
+															class="form-control" style="color: white;" readonly>
+															<option value="2020">2020</option>
+															<option value="2021">2021</option>
+															<option value="2022">2022</option>
+															<option value="2023">2023</option>
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Workday Month</label>
+													<div class="col-sm-9">
+														<select name="month" id="month" class="form-control"
+															th:field="*{monthOfWorkday}" style="color: white;">
+															<option value="0">January</option>
+															<option value="1">February</option>
+															<option value="2">March</option>
+															<option value="3">April</option>
+															<option value="4">May</option>
+															<option value="5">June</option>
+															<option value="6">July</option>
+															<option value="7">August</option>
+															<option value="8">September</option>
+															<option value="9">October</option>
+															<option value="10">November</option>
+															<option value="11">December</option>
 														</select>
 													</div>
 												</div>
@@ -300,11 +298,48 @@
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Number of Days</label>
+													<label class="col-sm-3 col-form-label">Select working days for
+														month</label>
 													<div class="col-sm-9">
-														<input type="number" name="noOfWorkdays" id="noOfWorkdays"
-															class="form-control" th:field="*{noOfWorkdays}"
-															style="color: white;">
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="sunday" value="Sunday">
+															<label class="form-check-label" for="sunday">Sunday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="monday" value="Monday">
+															<label class="form-check-label" for="monday">Monday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="tuesday" value="Tuesday">
+															<label class="form-check-label"
+																for="tuesday">Tuesday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="wednesday" value="Wednesday">
+															<label class="form-check-label"
+																for="wednesday">Wednesday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="thursday" value="Thursday">
+															<label class="form-check-label"
+																for="thursday">Thursday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="friday" value="Friday">
+															<label class="form-check-label" for="friday">Friday</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="saturday" value="Saturday">
+															<label class="form-check-label"
+																for="saturday">Saturday</label>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -313,8 +348,16 @@
 
 										</div>
 										<br>
+										<input type="hidden" name="noOfWorkdays" id="noOfWorkdays"
+											th:field="*{noOfWorkdays}">
+
+										<input type="hidden" name="selectedDaysOfWeek" id="selectedDaysOfWeek"
+											th:field="*{selectedDaysOfWeek}">
+
+
 										<center>
-											<input type="submit" class="btn btn-success btn-rounded btn-fw">
+											<input type="submit" class="btn btn-success btn-rounded btn-fw"
+												value="Submit">
 
 											<!-- Add multiple non-breaking spaces to create space between the buttons -->
 											<button type="button" class="btn btn-primary btn-rounded btn-fw"
@@ -341,39 +384,69 @@
 		<script src="/DashboardC/assets/js/misc.js"></script>
 		<script src="/DashboardC/assets/js/settings.js"></script>
 		<script src="/DashboardC/assets/js/todolist.js"></script>
-		
-		
+
 		<script>
-    // Get references to the month and number of days input elements
-    var monthSelect = document.getElementById("monthOfWorkday");
-    var numberOfDaysInput = document.getElementById("noOfWorkdays"); // Updated to "noOfWorkdays"
 
-    // Define an object to map months to their respective maximum days
-    var maxDaysInMonth = {
-        "01": 31, // January
-        "02": 28, // February (assuming non-leap year)
-        "03": 31, // March
-        "04": 30, // April
-        "05": 31, // May
-        "06": 30, // June
-        "07": 31, // July
-        "08": 31, // August
-        "09": 30, // September
-        "10": 31, // October
-        "11": 30, // November
-        "12": 31  // December
-    };
+			document.getElementById("dayForm").addEventListener("submit", function (e) {
+				// e.preventDefault(); 
+				console.log("Submit button clicked."); // Check if the event handler is triggered
+				const year = parseInt(document.getElementById("year").value);
+				const monthIndex = parseInt(document.getElementById("month").value);
+				const checkedBoxes = document.querySelectorAll('input[name="day"]:checked');
 
-    // Event listener to update the max attribute when the month changes
-    monthSelect.addEventListener("change", function() {
-        var selectedMonth = monthSelect.value;
-        numberOfDaysInput.max = maxDaysInMonth[selectedMonth];
-    });
+				let resultStr = "";
+				let totalCount = 0; // Initialize total count variable
+				let selectedDaysOfWeek = []; // Initialize an array to store selected days
 
-    // Initialize max attribute based on the initial selected month
-    var initialSelectedMonth = monthSelect.value;
-    numberOfDaysInput.max = maxDaysInMonth[initialSelectedMonth];
-</script>
+
+
+				checkedBoxes.forEach(checkbox => {
+					const dayCount = countDays(year, monthIndex, checkbox.value);
+					totalCount += dayCount; // Accumulate the count
+					resultStr += `${checkbox.value}: ${dayCount} times<br>`;
+					selectedDaysOfWeek.push(checkbox.value); // Push the selected day to the array
+				});
+				console.log("Before forEach loop");
+				checkedBoxes.forEach(checkbox => {
+					console.log(checkbox.value);
+				});
+				console.log("After forEach loop");
+
+
+
+
+				// Display the total count
+				resultStr += `Total: ${totalCount} days<br>`;
+
+				// Convert totalCount to a string and assign it to the noOfWorkdays field
+				document.getElementById("noOfWorkdays").value = totalCount.toString();
+
+				// Set the selectedDays array as a comma-separated string in the hidden input
+				document.getElementById("selectedDaysOfWeek").value = selectedDaysOfWeek.join(',');
+
+			});
+
+
+
+			function countDays(year, monthIndex, day) {
+				const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				const startDate = new Date(year, monthIndex, 1);
+				const endDate = new Date(year, monthIndex + 1, 0);
+
+				let count = 0;
+				for (let i = startDate.getDate(); i <= endDate.getDate(); i++) {
+					const checkDate = new Date(year, monthIndex, i);
+					if (days[checkDate.getDay()] === day) {
+						count++;
+					}
+				}
+				return count;
+			}
+
+		</script>
+
+
+
 
 		<!-- endinject -->
 		<!-- Custom js for this page -->

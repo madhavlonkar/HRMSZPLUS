@@ -243,45 +243,30 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="page-header">
-						<h3 class="page-title"> Workday Maintenance </h3>
+						<h3 class="page-title"> Add workday </h3>
 					</div>
 					<div class="row">
 						<div class="col-12 grid-margin">
 							<div class="card">
 								<div class="card-body">
 									<form class="form-sample" th:action="@{/workday/{id}(id=${workday.workdayId})}"
-										th:object="${workday}" method="POST">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Year</label>
-													<div class="col-sm-9">
-														<input type="number" name="workdayDate" id="yearOfWorkday"
-															class="form-control" th:field="*{yearOfWorkday}" />
-													</div>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Month</label>
+										th:object="${workday}" method="POST" id="dayForm">
 
+
+
+
+										<div class="row">
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Workdays Year</label>
 													<div class="col-sm-9">
-														<select class="form-control" name="monthOfWorkday"
-															id="monthOfWorkday" th:field="*{monthOfWorkday}"
-															style="color: white;">
-															<option value="">Select a month</option>
-															<option value="January">January</option>
-															<option value="February">February</option>
-															<option value="March">March</option>
-															<option value="April">April</option>
-															<option value="May">May</option>
-															<option value="June">June</option>
-															<option value="July">July</option>
-															<option value="August">August</option>
-															<option value="September">September</option>
-															<option value="October">October</option>
-															<option value="November">November</option>
-															<option value="December">December</option>
+														<select name="year" id="year" th:field="*{yearOfWorkday}"
+															class="form-control" style="color: white;">
+															<option value="2020">2020</option>
+															<option value="2021">2021</option>
+															<option value="2022">2022</option>
+															<option value="2023">2023</option>
 														</select>
 													</div>
 												</div>
@@ -289,23 +274,116 @@
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">No.of Days</label>
+													<label class="col-sm-3 col-form-label">Workday Month</label>
 													<div class="col-sm-9">
-														<input type="text" name="noOfWorkdays" id="noOfWorkdays"
-															class="form-control" th:field="*{noOfWorkdays}" />
+														<select name="month" id="month" class="form-control"
+															th:field="*{monthOfWorkday}" style="color: white;">
+															<option value="0">January</option>
+															<option value="1">February</option>
+															<option value="2">March</option>
+															<option value="3">April</option>
+															<option value="4">May</option>
+															<option value="5">June</option>
+															<option value="6">July</option>
+															<option value="7">August</option>
+															<option value="8">September</option>
+															<option value="9">October</option>
+															<option value="10">November</option>
+															<option value="11">December</option>
+														</select>
 													</div>
 												</div>
-
 											</div>
+
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Select working days for
+														month</label>
+													<div class="col-sm-9">
+														<!--	<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="sunday" value="Sunday">
+															<label class="form-check-label" for="sunday">Sunday</label>
+														</div>
+-->
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="sunday" value="Sunday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Sunday')}" />
+															<label class="form-check-label" for="sunday">Sunday</label>
+														</div>
+
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="monday" value="Monday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Monday')}" />
+															<label class="form-check-label" for="monday">Monday</label>
+														</div>
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="tuesday" value="Tuesday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Tuesday')}" />
+															<label class="form-check-label"
+																for="tuesday">Tuesday</label>
+														</div>
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="wednesday" value="Wednesday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Wednesday')}" />
+															<label class="form-check-label"
+																for="wednesday">Wednesday</label>
+														</div>
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="thursday" value="Thursday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Thursday')}" />
+															<label class="form-check-label"
+																for="thursday">Thursday</label>
+														</div>
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="friday" value="Friday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Friday')}" />
+															<label class="form-check-label" for="friday">Friday</label>
+														</div>
+
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="day"
+																id="saturday" value="Saturday"
+																th:checked="${selectedDaysOfWeek != null && selectedDaysOfWeek.contains('Saturday')}" />
+															<label class="form-check-label"
+																for="saturday">Saturday</label>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
 
 										</div>
 										<br>
+										<input type="hidden" name="noOfWorkdays" id="noOfWorkdays"
+											th:field="*{noOfWorkdays}">
+
+										<input type="hidden" name="selectedDaysOfWeek" id="selectedDaysOfWeek"
+											th:field="*{selectedDaysOfWeek}">
+
+
 										<center>
-											<input type="submit" class="btn btn-success btn-rounded btn-fw">
-											&nbsp;&nbsp;&nbsp;
+											<input type="submit" class="btn btn-success btn-rounded btn-fw"
+												value="Submit">
+
 											<!-- Add multiple non-breaking spaces to create space between the buttons -->
-											<button type="button" href="/workdays"
-												class="btn btn-primary btn-rounded btn-fw">Back</button>
+											<button type="button" class="btn btn-primary btn-rounded btn-fw"
+												onclick="window.location.href='/workdays'">Back</button>
 										</center>
 									</form>
 								</div>
@@ -328,6 +406,70 @@
 		<script src="/DashboardC/assets/js/misc.js"></script>
 		<script src="/DashboardC/assets/js/settings.js"></script>
 		<script src="/DashboardC/assets/js/todolist.js"></script>
+
+		<script>
+
+			document.getElementById("dayForm").addEventListener("submit", function (e) {
+				// e.preventDefault(); 
+				console.log("Submit button clicked."); // Check if the event handler is triggered
+				const year = parseInt(document.getElementById("year").value);
+				const monthIndex = parseInt(document.getElementById("month").value);
+				const checkedBoxes = document.querySelectorAll('input[name="day"]:checked');
+
+				let resultStr = "";
+				let totalCount = 0; // Initialize total count variable
+				let selectedDaysOfWeek = []; // Initialize an array to store selected days
+
+
+
+				checkedBoxes.forEach(checkbox => {
+					const dayCount = countDays(year, monthIndex, checkbox.value);
+					totalCount += dayCount; // Accumulate the count
+					resultStr += `${checkbox.value}: ${dayCount} times<br>`;
+					selectedDaysOfWeek.push(checkbox.value); // Push the selected day to the array
+				});
+				console.log("Before forEach loop");
+				checkedBoxes.forEach(checkbox => {
+					console.log(checkbox.value);
+				});
+				console.log("After forEach loop");
+
+
+
+
+				// Display the total count
+				resultStr += `Total: ${totalCount} days<br>`;
+
+				// Convert totalCount to a string and assign it to the noOfWorkdays field
+				document.getElementById("noOfWorkdays").value = totalCount.toString();
+
+				// Set the selectedDays array as a comma-separated string in the hidden input
+				document.getElementById("selectedDaysOfWeek").value = selectedDaysOfWeek.join(',');
+
+			});
+
+
+
+			function countDays(year, monthIndex, day) {
+				const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				const startDate = new Date(year, monthIndex, 1);
+				const endDate = new Date(year, monthIndex + 1, 0);
+
+				let count = 0;
+				for (let i = startDate.getDate(); i <= endDate.getDate(); i++) {
+					const checkDate = new Date(year, monthIndex, i);
+					if (days[checkDate.getDay()] === day) {
+						count++;
+					}
+				}
+				return count;
+			}
+
+		</script>
+
+
+
+
 		<!-- endinject -->
 		<!-- Custom js for this page -->
 		<!-- End custom js for this page -->

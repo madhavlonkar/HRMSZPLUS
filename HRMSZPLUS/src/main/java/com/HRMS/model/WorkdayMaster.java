@@ -25,6 +25,9 @@ public class WorkdayMaster {
     
     @Column(name = "noOfDays")
     private int noOfWorkdays;
+    
+    @Column(name = "workdaysInWeek") // Adjust the length as needed
+    private String selectedDaysOfWeek; // Store selected days as a comma-separated string
 
 	public int getWorkdayId() {
 		return workdayId;
@@ -58,25 +61,37 @@ public class WorkdayMaster {
 		this.noOfWorkdays = noOfWorkdays;
 	}
 
-	@Override
-	public String toString() {
-		return "WorkdayMaster [workdayId=" + workdayId + ", yearOfWorkday=" + yearOfWorkday + ", monthOfWorkday="
-				+ monthOfWorkday + ", noOfWorkdays=" + noOfWorkdays + "]";
+	public String getSelectedDaysOfWeek() {
+		return selectedDaysOfWeek;
 	}
 
-	public WorkdayMaster(int workdayId, int yearOfWorkday, String monthOfWorkday, int noOfWorkdays) {
+	public void setSelectedDaysOfWeek(String selectedDaysOfWeek) {
+		this.selectedDaysOfWeek = selectedDaysOfWeek;
+	}
+
+	public WorkdayMaster(int workdayId, int yearOfWorkday, String monthOfWorkday, int noOfWorkdays,
+			String selectedDaysOfWeek) {
 		super();
 		this.workdayId = workdayId;
 		this.yearOfWorkday = yearOfWorkday;
 		this.monthOfWorkday = monthOfWorkday;
 		this.noOfWorkdays = noOfWorkdays;
+		this.selectedDaysOfWeek = selectedDaysOfWeek;
 	}
 
 	public WorkdayMaster() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
+
+	@Override
+	public String toString() {
+		return "WorkdayMaster [workdayId=" + workdayId + ", yearOfWorkday=" + yearOfWorkday + ", monthOfWorkday="
+				+ monthOfWorkday + ", noOfWorkdays=" + noOfWorkdays + ", selectedDaysOfWeek=" + selectedDaysOfWeek
+				+ "]";
+	}
+
+	
     
 
 

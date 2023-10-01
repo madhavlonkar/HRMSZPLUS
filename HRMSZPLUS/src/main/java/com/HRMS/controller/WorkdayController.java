@@ -16,133 +16,126 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.HRMS.model.WorkdayMaster;
 import com.HRMS.service.WorkdayService;
 
-
 @Controller
 public class WorkdayController {
 	private static final Logger log = LoggerFactory.getLogger(WorkdayController.class);
 
 	@Autowired
 	private WorkdayService workdayService;
-	
+
 	@GetMapping("/workdays")
 	public String getWorkdays(Model model) {
-		
-		List<WorkdayMaster> workdays = workdayService.getAllWorkdays();
-		if(workdays.isEmpty())
-		{
-			log.error("No Workday Avilable To Retrieve");
-			return "/Workday/WorkdayMaintenance";
-		}
-		model.addAttribute("workdays",workdays);
-		return "/Workday/WorkdayMaintenance";
-		
-	}
-	
-	@GetMapping("/workdays/new")
-	public String createWorkdayForm(Model model) {
-	    model.addAttribute("workday", new WorkdayMaster());
-	    
-	    List<String> years = Arrays.asList("2023", "2024", "2025"); // Add your list of years here
-	    model.addAttribute("years", years);
-	    return "Workday/NewWorkday";
+		model.addAttribute("workdays", new WorkdayMaster());
+
+		return "/Workday/SelectYear";
+
 	}
 
-	
-	
-	
+	@GetMapping("/workdays/new/{year}")
+	public String createWorkdayForm(@PathVariable("year") int year,Model model) {
+		WorkdayMaster w=new WorkdayMaster();
+		w.setYearOfWorkday(year);
+		model.addAttribute("workday", w);
+
+		return "Workday/NewWorkday";
+	}
+
 	@PostMapping("/workdays")
 	public String addWorkday(@ModelAttribute("workday") WorkdayMaster workdaymaster) {
-		
+
 		WorkdayMaster workday = workdayService.saveWorkday(workdaymaster);
-		if(workday == null)
-		{
+		if (workday == null) {
 			log.error("Unable to Save Data");
 			return "redirect:/workdays";
 		}
-		
+
 		return "redirect:/workdays";
 	}
-	
+
 	@GetMapping("/workday/edit/{id}")
-	public String editWorkday(@PathVariable("id") int id,Model model)
-	{
+	public String editWorkday(@PathVariable("id") int id, Model model) {
 		WorkdayMaster workday = workdayService.findWorkdayById(id);
-		
-		if(workday == null)
-		{
+
+		if (workday == null) {
 			log.error("Workday with ID " + id + " not found.");
 			return "redirect:/workday";
 		}
-		
-		model.addAttribute("workday",workday);
+		List<String> selectedDaysOfWeek = Arrays.asList(workday.getSelectedDaysOfWeek().split(","));
+
+		model.addAttribute("selectedDaysOfWeek", selectedDaysOfWeek);
+
+		model.addAttribute("workday", workday);
 		return "/Workday/editWorkday";
 	}
-	
-	
+
 	@PostMapping("/workday/{id}")
-	public String updateworkday(@PathVariable("id") int id,
-			@ModelAttribute("workday") WorkdayMaster workdaymaster){
+	public String updateworkday(@PathVariable("id") int id, @ModelAttribute("workday") WorkdayMaster workdaymaster) {
 		System.out.print("");
-	
+
 		try {
 			WorkdayMaster existingWorkday = workdayService.findWorkdayById(id);
-				
-			if(existingWorkday == null)
-			{
+
+			if (existingWorkday == null) {
 				log.error("Workday with id " + id + " not found.");
 				return "redirect:/workdays";
-			}
-			else {
+			} else {
 				workdaymaster.setWorkdayId(id);
 				workdayService.updateWorkday(workdaymaster);
 				return "redirect:/workdays";
-				
+
 			}
-		}catch(Exception e)
-		{
-			log.error("Failed to update workday with id " + id ,e);
+		} catch (Exception e) {
+			log.error("Failed to update workday with id " + id, e);
 			e.printStackTrace();
 			return "redirect:/workdays";
 		}
-		
-		
+
 	}
-	
 
 	@GetMapping("/workday/{id}")
 	public String deleteWorkday(@PathVariable("id") int id) {
 		try {
 			WorkdayMaster existngWorkday = workdayService.findWorkdayById(id);
-			
-			if(existngWorkday == null)
-			{
+
+			if (existngWorkday == null) {
 				log.error("Workday with ID " + id + " not found.");
-			}else {
+			} else {
 				workdayService.deleteWorkday(id);
 			}
-			
-		}catch(Exception e)
-		{
-			log.error("Failed to delete workday with ID" + id,e);
+
+		} catch (Exception e) {
+			log.error("Failed to delete workday with ID" + id, e);
 			e.printStackTrace();
 			return "redirect:/workdays";
 		}
-		
+
 		return "redirect:/workdays";
 	}
-	
-	
-	//For view 
+
+	// For view
 	@GetMapping("/workday/view/{id}")
-	public String viewWorkday(@PathVariable("id") int id ,Model model)
-	{
+	public String viewWorkday(@PathVariable("id") int id, Model model) {
 		WorkdayMaster workday = workdayService.findWorkdayById(id);
-		if(workday == null)
-		{
+		if (workday == null) {
 			return "redirect:/workday";
 		}
 		model.addAttribute("workday", workday);
 		return "/Workday/ViewWorkday";
 	}
-	
+
+	@PostMapping("/allWorkdays/{year}")
+	public String getWorkdaysByYear(@PathVariable("year") int year, Model model) {
+		List<WorkdayMaster> findByYear = workdayService.findByYear(year);
+
+		if (findByYear.isEmpty()) {
+			log.error("No months in year :" + year);
+		}
+		
+		model.addAttribute("selectedYear", year);
+
+		model.addAttribute("workdays", findByYear);
+		return "/Workday/WorkdayMaintenance";
+
+	}
+
 }
