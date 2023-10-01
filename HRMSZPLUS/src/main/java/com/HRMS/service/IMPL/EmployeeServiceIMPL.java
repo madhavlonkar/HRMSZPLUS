@@ -49,9 +49,9 @@ public class EmployeeServiceIMPL implements EmployeeService{
 	}
 
 	@Override
-	public EmployeeMaster findById(int id) {
+	public EmployeeMaster findById(long id) {
 		try {
-			return employeedao.findById(id).get();
+			return employeedao.findById(id).orElse(null);
 			
 		}catch(Exception e)
 		{
@@ -63,7 +63,7 @@ public class EmployeeServiceIMPL implements EmployeeService{
 	}
 
 	@Override
-	public boolean deleteEmployee(int id) {
+	public boolean deleteEmployee(long id) {
 		try
 		{
 			employeedao.deleteById(id);

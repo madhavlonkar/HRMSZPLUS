@@ -32,6 +32,10 @@ public class EmployeeMaster {
     private String employeePan;
     
     
+//    @OneToMany
+//    private List<EmpAllowanceMaster> employeeAllowances;
+
+    
     //page2
     @ManyToOne
 	@JoinColumn(name="designationID")
