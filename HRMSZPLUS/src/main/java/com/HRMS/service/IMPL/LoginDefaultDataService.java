@@ -22,6 +22,7 @@ public class LoginDefaultDataService {
             LoginMaster defaultUser = new LoginMaster();
             defaultUser.setUserId(0);
             defaultUser.setUsername("Admin");
+            defaultUser.setEmail("madhavlonkar2@gmail.com");
             String password=BCrypt.hashpw("Admin", BCrypt.gensalt());
             defaultUser.setPassword(password);
             defaultUser.setRole("Admin");

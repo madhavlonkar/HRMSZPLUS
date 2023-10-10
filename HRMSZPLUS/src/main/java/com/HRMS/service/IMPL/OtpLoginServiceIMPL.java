@@ -168,7 +168,7 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
 			
 			if(username.equals("Admin"))
 			{
-				email.sendEmailWithOtp("madhavlonkar2@gmail.com", pin);
+				email.sendEmailWithOtp(l.getEmail(), pin);
 			}
 			else
 			{
