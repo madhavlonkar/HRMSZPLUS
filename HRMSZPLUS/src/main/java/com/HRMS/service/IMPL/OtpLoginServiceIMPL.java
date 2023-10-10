@@ -199,6 +199,18 @@ public class OtpLoginServiceIMPL implements OtpLoginService {
         otplogindao.deleteLockedAccounts(cutoffTime);
     }
 
+	@Override
+	public void deleteOtpByUsername(String username) {
+		// TODO Auto-generated method stub
+		otplogindao.deleteByUsername(username);
+		try {
+			otplogindao.deleteByUsername(username);
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to delete otp for reset password.");
+		}
+		
+	}
+
 	
 	
 

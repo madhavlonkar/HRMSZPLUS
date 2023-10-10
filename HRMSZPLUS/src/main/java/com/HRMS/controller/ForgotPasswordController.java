@@ -20,13 +20,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ForgotPasswordController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(DeductionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ForgotPasswordController.class);
 
     @Autowired
     private LoginService loginService; // Inject your user service
 
-    @Autowired
-    private EmailService emailService; // Inject your EmailService
     
     @Autowired
     private OtpLoginService otpLoginService;
@@ -159,6 +157,7 @@ public class ForgotPasswordController {
 	            	System.out.println(""+userDetails.getPassword());
 	            	loginMaster.setPassword(userDetails.getPassword());
 	                loginService.updateLogins(loginMaster);
+	               otpLoginService.deleteOtpByUsername(username);
 	                return "redirect:/login"; // Redirect to a relevant page after updating the password
 	            }
 

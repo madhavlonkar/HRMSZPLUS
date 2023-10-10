@@ -271,7 +271,7 @@
 							<div class="card">
 								<div class="card-body">
 									<form class="form-sample" th:action="@{/employee}" th:object="${employee}"
-										method="POST">
+										method="POST" enctype="multipart/form-data">
 
 
 										<div id="page1">
@@ -290,8 +290,8 @@
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Employee Address</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}"
+															<input type="text" name="currentAddress" id="currentAddress"
+																class="form-control" th:field="*{currentAddress}"
 																placeholder="Current Address" />
 														</div>
 													</div>
@@ -301,8 +301,9 @@
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Employee Address</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}"
+															<input type="text" name="permanentAddress"
+																id="permanentAddress" class="form-control"
+																th:field="*{permanentAddress}"
 																placeholder="Permenant Address" />
 														</div>
 													</div>
@@ -313,7 +314,7 @@
 														<label class="col-sm-3 col-form-label">Date of Birth</label>
 														<div class="col-sm-9">
 															<input type="date" class="form-control"
-																placeholder="dd/mm/yyyy" />
+																placeholder="dd/mm/yyyy" th:field="*{dateOfBirth}" />
 														</div>
 													</div>
 												</div>
@@ -325,16 +326,16 @@
 															<div class="form-check">
 																<label class="form-check-label">
 																	<input type="radio" class="form-check-input"
-																		name="membershipRadios" id="membershipRadios1"
-																		value="" checked> Male </label>
+																		name="gender" id="gender" value="Male" checked
+																		th:field="*{gender}"> Male </label>
 															</div>
 														</div>
 														<div class="col-sm-5">
 															<div class="form-check">
 																<label class="form-check-label">
 																	<input type="radio" class="form-check-input"
-																		name="membershipRadios" id="membershipRadios2"
-																		value="option2"> Female </label>
+																		name="gender" id="gender" value="Female"
+																		th:field="*{gender}"> Female </label>
 															</div>
 														</div>
 													</div>
@@ -345,8 +346,8 @@
 														<label class="col-sm-3 col-form-label">Employee
 															Email</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}"
+															<input type="email" name="employeeEmail" id="employeeEmail"
+																class="form-control" th:field="*{employeeEmail}"
 																placeholder="abc@gmail.com" />
 														</div>
 													</div>
@@ -357,8 +358,9 @@
 														<label class="col-sm-3 col-form-label">Employee
 															Contact No</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="employeeContactNo"
+																id="employeeContactNo" class="form-control"
+																th:field="*{employeeContactNo}" />
 														</div>
 													</div>
 												</div>
@@ -368,9 +370,10 @@
 														<label class="col-sm-3 col-form-label">
 															Maritial Status</label>
 														<div class="col-sm-9">
-															<select class="form-control" style="color: white;">
-																<option>Married</option>
-																<option>Unmarried</option>
+															<select class="form-control" style="color: white;"
+																th:field="*{maritalStatus}">
+																<option value="Married">Married</option>
+																<option value="Unmarried">Unmarried</option>
 															</select>
 														</div>
 													</div>
@@ -381,9 +384,10 @@
 														<label class="col-sm-3 col-form-label">
 															State</label>
 														<div class="col-sm-9">
-															<select class="form-control" style="color: white;">
-																<option>Maharashtra</option>
-																<option>Gujrat</option>
+															<select class="form-control" style="color: white;"
+																th:field="*{state}">
+																<option value="Maharashtra">Maharashtra</option>
+																<option value="Gujrat">Gujrat</option>
 															</select>
 														</div>
 													</div>
@@ -393,8 +397,8 @@
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Employee Pan</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="employeePan" id="employeePan"
+																class="form-control" th:field="*{employeePan}" />
 														</div>
 													</div>
 												</div>
@@ -408,15 +412,15 @@
 												<div class="col-md-6">
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Select
-															Designation</label>
+															Department</label>
 														<div class="col-sm-9">
 															<select class="form-control" style="color: white;"
-																th:field="*{empDepartment.departmentId}">
+																th:field="*{department.departmentId}">
 																<option value="0" disabled selected>Select
 																</option>
-																<option th:each="department : ${departments}"
-																	th:value="${department.departmentId}"
-																	th:text="${department.departmentName}">
+																<option th:each="departmentz : ${allDepartments}"
+																	th:value="${departmentz.departmentId}"
+																	th:text="${departmentz.departmentName}">
 																</option>
 															</select>
 														</div>
@@ -426,15 +430,15 @@
 												<div class="col-md-6">
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Select
-															Department</label>
+															Designation</label>
 														<div class="col-sm-9">
 															<select class="form-control" style="color: white;"
-																th:field="*{empDepartment.departmentId}">
+																th:field="*{designation.designationId}">
 																<option value="0" disabled selected>Select
 																</option>
-																<option th:each="department : ${departments}"
-																	th:value="${department.departmentId}"
-																	th:text="${department.departmentName}">
+																<option th:each="designationz : ${allDesignations}"
+																	th:value="${designationz.designationId}"
+																	th:text="${designationz.designationName}">
 																</option>
 															</select>
 														</div>
@@ -448,12 +452,12 @@
 														<label class="col-sm-3 col-form-label">Date of Joining</label>
 														<div class="col-sm-9">
 															<input type="date" class="form-control"
-																placeholder="dd/mm/yyyy" />
+																placeholder="dd/mm/yyyy" th:field="*{dateOfJoining}" />
 														</div>
 													</div>
 												</div>
 
-												<div class="col-md-6">
+												<!--<div class="col-md-6">
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">Select
 															Manager</label>
@@ -469,17 +473,18 @@
 															</select>
 														</div>
 													</div>
-												</div>
+												</div> -->
 
 												<div class="col-md-6">
 													<div class="form-group row">
 														<label class="col-sm-3 col-form-label">
 															Employement Type</label>
 														<div class="col-sm-9">
-															<select class="form-control" style="color: white;">
-																<option>Full-time</option>
-																<option>Part-time</option>
-																<option>Contract</option>
+															<select class="form-control" style="color: white;"
+																th:field="*{employmentType}">
+																<option value="Full-time">Full-time</option>
+																<option value="Part-time">Part-time</option>
+																<option value="Contract">Contract</option>
 															</select>
 														</div>
 													</div>
@@ -496,12 +501,12 @@
 															Bank</label>
 														<div class="col-sm-9">
 															<select class="form-control" style="color: white;"
-																th:field="*{empDepartment.departmentId}">
+																th:field="*{bank.bankId}">
 																<option value="0" disabled selected>Select
 																</option>
-																<option th:each="department : ${departments}"
-																	th:value="${department.departmentId}"
-																	th:text="${department.departmentName}">
+																<option th:each="banksz : ${allbanks}"
+																	th:value="${banksz.bankId}"
+																	th:text="${banksz.bankName}">
 																</option>
 															</select>
 														</div>
@@ -513,8 +518,9 @@
 														<label class="col-sm-3 col-form-label">Bank Account
 															Number</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="bankAccountNumber"
+																id="bankAccountNumber" class="form-control"
+																th:field="*{bankAccountNumber}" />
 														</div>
 													</div>
 												</div>
@@ -524,8 +530,8 @@
 														<label class="col-sm-3 col-form-label">Bank IFSC
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="bankIFSC" id="bankIFSC"
+																class="form-control" th:field="*{bankIFSC}" />
 														</div>
 													</div>
 												</div>
@@ -540,14 +546,15 @@
 														<label class="col-sm-3 col-form-label">
 															Highest Eduction</label>
 														<div class="col-sm-9">
-															<select class="form-control" style="color: white;">
+															<select class="form-control" style="color: white;"
+																th:field="*{highestEducation}">
 																<option value="">Select</option>
-																<option value="high_school">High School</option>
-																<option value="associate_degree">Associate Degree
+																<option value="High School">High School</option>
+																<option value="Associate Degree">Associate Degree
 																</option>
-																<option value="bachelor_degree">Bachelor's Degree
+																<option value="Bachelor's Degree">Bachelor's Degree
 																</option>
-																<option value="master_degree">Master's Degree</option>
+																<option value="Master's Degree">Master's Degree</option>
 																<option value="doctorate">Doctorate</option>
 															</select>
 														</div>
@@ -559,8 +566,9 @@
 														<label class="col-sm-3 col-form-label">College/University Name
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="collegeUniversityName"
+																id="collegeUniversityName" class="form-control"
+																th:field="*{collegeUniversityName}" />
 														</div>
 													</div>
 												</div>
@@ -570,8 +578,8 @@
 														<label class="col-sm-3 col-form-label">Area Of Study
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="areaOfStudy" id="areaOfStudy"
+																class="form-control" th:field="*{areaOfStudy}" />
 														</div>
 													</div>
 												</div>
@@ -582,7 +590,8 @@
 															Graduation</label>
 														<div class="col-sm-9">
 															<input type="date" class="form-control"
-																placeholder="dd/mm/yyyy" />
+																placeholder="dd/mm/yyyy"
+																th:field="*{dateOfGraduation}" />
 														</div>
 													</div>
 												</div>
@@ -596,8 +605,9 @@
 														<label class="col-sm-3 col-form-label">Name Of Emergency Contact
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="emergencyContactName"
+																id="emergencyContactName" class="form-control"
+																th:field="*{emergencyContactName}" />
 														</div>
 													</div>
 												</div>
@@ -607,14 +617,15 @@
 														<label class="col-sm-3 col-form-label">
 															Relation</label>
 														<div class="col-sm-9">
-															<select class="form-control" style="color: white;">
+															<select class="form-control" style="color: white;"
+																th:field="*{emergencyContactRelation}">
 																<option value="">Select</option>
-																<option value="high_school">Mother</option>
-																<option value="associate_degree">Father
+																<option value="Mother">Mother</option>
+																<option value="Father">Father
 																</option>
-																<option value="bachelor_degree">Sister
+																<option value="Sister">Sister
 																</option>
-																<option value="master_degree">Brother</option>
+																<option value="Brother">Brother</option>
 															</select>
 														</div>
 													</div>
@@ -625,8 +636,9 @@
 														<label class="col-sm-3 col-form-label">Address
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="emergencyContactAddress"
+																id="emergencyContactAddress" class="form-control"
+																th:field="*{emergencyContactAddress}" />
 														</div>
 													</div>
 												</div>
@@ -636,8 +648,9 @@
 														<label class="col-sm-3 col-form-label">Contact
 														</label>
 														<div class="col-sm-9">
-															<input type="text" name="empName" id="empName"
-																class="form-control" th:field="*{empName}" />
+															<input type="text" name="emergencyContactContact"
+																id="emergencyContactContact" class="form-control"
+																th:field="*{emergencyContactContact}" />
 														</div>
 													</div>
 												</div>
@@ -655,12 +668,12 @@
 															Reference</label>
 														<div class="col-sm-9">
 															<select class="form-control" style="color: white;"
-																th:field="*{empDepartment.departmentId}">
+																th:field="*{reference.empId}">
 																<option value="0" disabled selected>Select
 																</option>
-																<option th:each="department : ${departments}"
-																	th:value="${department.departmentId}"
-																	th:text="${department.departmentName}">
+																<option th:each="employeesz : ${allEmployees}"
+																	th:value="${employeesz.empId}"
+																	th:text="${employeesz.empName}">
 																</option>
 															</select>
 														</div>
@@ -669,11 +682,12 @@
 											</div>
 
 											<div class="form-group">
-												<label>Upload Resume</label>
-												<input type="file" name="img[]" class="file-upload-default">
+												<label>Upload Resume (Max 3MB)</label>
+												<input type="file" name="resumeFile" class="file-upload-default"
+													accept=".pdf" onchange="validateResumeSize(this)">
 												<div class="input-group col-xs-12">
 													<input type="text" class="form-control file-upload-info" disabled=""
-														placeholder="Upload Image">
+														placeholder="Upload Resume">
 													<span class="input-group-append">
 														<button class="file-upload-browse btn btn-primary"
 															type="button">Upload</button>
@@ -682,8 +696,9 @@
 											</div>
 
 											<div class="form-group">
-												<label>Upload Profile</label>
-												<input type="file" name="img[]" class="file-upload-default">
+												<label>Upload Profile Photo (Max 1MB)</label>
+												<input type="file" name="profilePhoto" class="file-upload-default"
+													accept="image/*" onchange="validateProfilePhotoSize(this)">
 												<div class="input-group col-xs-12">
 													<input type="text" class="form-control file-upload-info" disabled=""
 														placeholder="Upload Image">
@@ -694,93 +709,163 @@
 												</div>
 											</div>
 
+											<script>
+												function validateResumeSize(input) {
+													if (input.files[0]) {
+														const fileSize = input.files[0].size; // Size in bytes
+														const maxSize = 3 * 1024 * 1024; // 5MB in bytes
 
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Employment Eligibility Verification</label>
-													<div class="col-sm-4">
-														<div class="form-check form-check-success">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="ExampleRadio2" checked="">
-																Pass <i class="input-helper"></i></label>
+														if (fileSize > maxSize) {
+															alert("Resume file size exceeds 5MB limit. Please choose a smaller file.");
+															input.value = ''; // Clear the input field
+														}
+													}
+												}
+
+												function validateProfilePhotoSize(input) {
+													if (input.files[0]) {
+														const fileSize = input.files[0].size; // Size in bytes
+														const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+
+														if (fileSize > maxSize) {
+															alert("Profile photo size exceeds 1MB limit. Please choose a smaller file.");
+															input.value = ''; // Clear the input field
+														}
+													}
+												}
+											</script>
+
+											<!--<div class="form-group row">
+												<label class="col-sm-6 col-form-label">Employment Eligibility
+													Verification</label>
+												<div class="col-sm-6">
+													<div class="form-check form-check-success">
+														<label class="form-check-label">
+															<input type="radio" class="form-check-input"
+																th:field="*{employmentEligibilityVerification}"
+																th:value="true">Pass
+															<i class="input-helper"></i>
+														</label>
+													</div>
+													<div class="form-check form-check-danger">
+														<label class="form-check-label">
+															<input type="radio" class="form-check-input"
+																th:field="*{employmentEligibilityVerification}"
+																th:value="false">Fail
+															<i class="input-helper"></i>
+														</label>
+													</div>
+												</div>
+											</div>-->
+
+											<!-- Similar changes for other fields -->
+
+
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Employment Eligibility
+															Verification</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="employmentEligibility"
+																		id="eligibilityPass" value="Pass" checked
+																		th:field="*{employmentEligibilityVerification}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="employmentEligibility"
+																		id="eligibilityFail" value="Fail"
+																		th:field="*{employmentEligibilityVerification}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
 														</div>
 													</div>
-													<div class="col-sm-5">
-														<div class="form-check form-check-danger">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio4" id="ExampleRadio4" checked="">
-																Fail <i class="input-helper"></i></label>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Non-Disclosure Agreement
+															(NDA) Consent</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="ndaConsent" id="ndaPass" value="Pass"
+																		checked th:field="*{ndaConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="ndaConsent" id="ndaFail" value="Fail"
+																		th:field="*{ndaConsent}">
+																	Fail
+																</label>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-											
-											
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Non-Disclosure Agreement (NDA) Consent</label>
-													<div class="col-sm-4">
-														<div class="form-check form-check-success">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="ExampleRadio2" checked="">
-																Pass <i class="input-helper"></i></label>
-														</div>
-													</div>
-													<div class="col-sm-5">
-														<div class="form-check form-check-danger">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio4" id="ExampleRadio4" checked="">
-																Fail <i class="input-helper"></i></label>
-														</div>
-													</div>
-												</div>
-											</div>
-											
-											
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Criminal Background Check Consent</label>
-													<div class="col-sm-4">
-														<div class="form-check form-check-success">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="ExampleRadio2" checked="">
-																Pass <i class="input-helper"></i></label>
-														</div>
-													</div>
-													<div class="col-sm-5">
-														<div class="form-check form-check-danger">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio4" id="ExampleRadio4" checked="">
-																Fail <i class="input-helper"></i></label>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Criminal Background Check
+															Consent</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="criminalConsent" id="criminalPass"
+																		value="Pass" checked
+																		th:field="*{criminalBackgroundCheckConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="criminalConsent" id="criminalFail"
+																		value="Fail"
+																		th:field="*{criminalBackgroundCheckConsent}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											
-											
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Drug Testing Consent (if applicable)</label>
-													<div class="col-sm-4">
-														<div class="form-check form-check-success">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="ExampleRadio2" checked="">
-																Pass <i class="input-helper"></i></label>
-														</div>
-													</div>
-													<div class="col-sm-5">
-														<div class="form-check form-check-danger">
-															<label class="form-check-label">
-																<input type="radio" class="form-check-input"
-																	name="ExampleRadio4" id="ExampleRadio4" checked="">
-																Fail <i class="input-helper"></i></label>
+
+												<div class="col-md-6">
+													<div class="form-group row">
+														<label class="col-sm-6 col-form-label">Drug Testing Consent (if
+															applicable)</label>
+														<div class="col-sm-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="drugTestingConsent" id="drugPass"
+																		value="Pass" checked
+																		th:field="*{drugTestingConsent}">
+																	Pass <i class="input-helper"></i>
+																</label>
+															</div>
+															<div class="form-check form-check-danger">
+																<label class="form-check-label">
+																	<input type="radio" class="form-check-input"
+																		name="drugTestingConsent" id="drugFail"
+																		value="Fail" th:field="*{drugTestingConsent}">
+																	Fail <i class="input-helper"></i>
+																</label>
+															</div>
 														</div>
 													</div>
 												</div>
