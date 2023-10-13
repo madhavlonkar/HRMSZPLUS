@@ -16,4 +16,7 @@ public interface HolidayService {
 	
 	void deleteHoliday(int id);
 
+	int countHolidays(int year, int month);
+
+
 }

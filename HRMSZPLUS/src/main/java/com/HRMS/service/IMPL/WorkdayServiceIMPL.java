@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.HRMS.dao.WorkdayDAO;
 import com.HRMS.model.WorkdayMaster;
+import com.HRMS.service.HolidayService;
 import com.HRMS.service.WorkdayService;
 
 @Service
@@ -14,6 +15,9 @@ public class WorkdayServiceIMPL implements WorkdayService {
 
 	@Autowired
 	private WorkdayDAO workdaydao;
+	
+	@Autowired
+    private HolidayService holidayService;
 
 	@Override
 	public List<WorkdayMaster> getAllWorkdays() {
@@ -28,7 +32,9 @@ public class WorkdayServiceIMPL implements WorkdayService {
 	@Override
 	public WorkdayMaster saveWorkday(WorkdayMaster workdaymaster) {
 		WorkdayMaster workmaster = null;
-
+		int holidays=holidayService.countHolidays(workdaymaster.getYearOfWorkday(), workdaymaster.getMonthOfWorkday());
+		int totalworkdays=workdaymaster.getNoOfWorkdays()-holidays;
+		workdaymaster.setNoOfWorkdays(totalworkdays);
 		try {
 			workmaster = workdaydao.save(workdaymaster);
 			return workmaster;

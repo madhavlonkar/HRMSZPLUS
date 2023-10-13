@@ -13,7 +13,6 @@ public class WorkdayMaster {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name = "workday_id")
 	private int workdayId;
 
@@ -21,7 +20,7 @@ public class WorkdayMaster {
     private int yearOfWorkday;
     
     @Column(name = "month")
-    private String monthOfWorkday;
+    private int monthOfWorkday;
     
     @Column(name = "noOfDays")
     private int noOfWorkdays;
@@ -45,11 +44,11 @@ public class WorkdayMaster {
 		this.yearOfWorkday = yearOfWorkday;
 	}
 
-	public String getMonthOfWorkday() {
+	public int getMonthOfWorkday() {
 		return monthOfWorkday;
 	}
 
-	public void setMonthOfWorkday(String monthOfWorkday) {
+	public void setMonthOfWorkday(int monthOfWorkday) {
 		this.monthOfWorkday = monthOfWorkday;
 	}
 
@@ -69,7 +68,7 @@ public class WorkdayMaster {
 		this.selectedDaysOfWeek = selectedDaysOfWeek;
 	}
 
-	public WorkdayMaster(int workdayId, int yearOfWorkday, String monthOfWorkday, int noOfWorkdays,
+	public WorkdayMaster(int workdayId, int yearOfWorkday, int monthOfWorkday, int noOfWorkdays,
 			String selectedDaysOfWeek) {
 		super();
 		this.workdayId = workdayId;
