@@ -59,7 +59,7 @@ public class OtpLoginController {
 			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUser"));
 //			session.invalidate();
 			
-			return "redirect:/dashboard";
+			return "redirect:/allowances";
 		} else {
 			
 			otploginservice.recordFailedAttempt(loggedInUsername);
