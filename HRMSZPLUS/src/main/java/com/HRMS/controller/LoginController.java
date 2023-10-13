@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.HRMS.model.EmployeeMaster;
 import com.HRMS.model.LoginMaster;
+import com.HRMS.service.EmployeeService;
 import com.HRMS.service.LoginService;
 import com.HRMS.service.OtpLoginService;
 
@@ -24,6 +26,8 @@ public class LoginController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
+	@Autowired
+	private EmployeeService employeeservice;
 	
 	@Autowired
 	private LoginService loginservice;
@@ -82,6 +86,8 @@ public class LoginController {
 	@GetMapping("availableUsers/addUser")
 	public String AddnewUser(Model model)
 	{
+		List<EmployeeMaster> allEmployees = employeeservice.getAllEmployees();
+		model.addAttribute("employees",allEmployees);
 		model.addAttribute("login",new LoginMaster());
 		return "/Login/newUser";
 	}

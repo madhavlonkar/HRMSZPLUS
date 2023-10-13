@@ -1,7 +1,12 @@
 package com.HRMS.model;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -10,12 +15,25 @@ import jakarta.persistence.Table;
 public class LoginMaster {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
-
+	
+	@OneToOne
+	@JoinColumn(name = "employee")
+	private EmployeeMaster employee;
+	
 	private String username;
 	private String password;
 	private String role;
 	private String email;
+	
+	
+	public EmployeeMaster getEmployee() {
+		return employee;
+	}
+	public void setEmployee(EmployeeMaster employee) {
+		this.employee = employee;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -46,16 +64,19 @@ public class LoginMaster {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public LoginMaster(int userId, String username, String password, String role, String email) {
+	
+	public LoginMaster() {
+		super();
+	}
+	public LoginMaster(int userId, EmployeeMaster employee, String username, String password, String role,
+			String email) {
 		super();
 		this.userId = userId;
+		this.employee = employee;
 		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.email = email;
-	}
-	public LoginMaster() {
-		super();
 	}
 	
 	

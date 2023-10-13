@@ -1,7 +1,6 @@
 package com.HRMS.service.IMPL;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
@@ -10,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.HRMS.dao.LoginDAO;
+import com.HRMS.model.EmployeeMaster;
 import com.HRMS.model.LoginMaster;
+import com.HRMS.service.EmployeeService;
 import com.HRMS.service.LoginService;
 import com.HRMS.service.OtpLoginService;
 
@@ -19,6 +20,9 @@ public class LoginServiceIMPL implements LoginService {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginServiceIMPL.class);
 
+	@Autowired
+	private EmployeeService employeeservice;
+	
 	@Autowired
 	private LoginDAO logindao;
 
@@ -72,10 +76,11 @@ public class LoginServiceIMPL implements LoginService {
 
 	@Override
 	public boolean newUser(LoginMaster loginmaster) {
-
+		
 		try {
-			loginmaster.setUserId(2);
-			loginmaster.setEmail("madhavlonkar2@gmail.com");
+			EmployeeMaster findById = employeeservice.findById(loginmaster.getEmployee().getEmpId());
+			loginmaster.setEmployee(findById);
+			loginmaster.setEmail(findById.getEmployeeEmail());
 			String hashedPassword = BCrypt.hashpw(loginmaster.getPassword(), BCrypt.gensalt());
 			loginmaster.setPassword(hashedPassword);
 			logindao.save(loginmaster);

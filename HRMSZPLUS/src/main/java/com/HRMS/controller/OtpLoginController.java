@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.HRMS.model.LoginMaster;
 import com.HRMS.model.OtpLoginMaster;
+import com.HRMS.service.LoginService;
 import com.HRMS.service.OtpLoginService;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +17,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class OtpLoginController {
 
+	@Autowired
+	private LoginService loginservice;
+	
 	@Autowired
 	private OtpLoginService otploginservice;
 
@@ -53,13 +57,23 @@ public class OtpLoginController {
 		String loggedInUsername = (String) session.getAttribute("loggedInUsername");
 		boolean otpVerified = otploginservice.verifyOtp(loggedInUsername,otploginmaster.getPin());
 		if (otpVerified) {
-			
+			LoginMaster findByUsername = loginservice.findByUsername(loggedInUsername);
+			if(loggedInUsername.equals("Admin"))
+			{
+				session.setAttribute("otpVerifiedUser", loggedInUsername);
+			}
+			else
+			{
+				session.setAttribute("otpVerifiedUser", findByUsername.getEmployee().getEmpName());
+			}
+			session.setAttribute("otpVerifiedUserRole", findByUsername.getRole());
 			otploginservice.resetFailedAttemp(loggedInUsername);
-			session.setAttribute("otpVerifiedUser", loggedInUsername);
-			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUser"));
+			
+//			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUser"));
+//			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUserRole"));
 //			session.invalidate();
 			
-			return "redirect:/allowances";
+			return "redirect:/dashboard";
 		} else {
 			
 			otploginservice.recordFailedAttempt(loggedInUsername);
