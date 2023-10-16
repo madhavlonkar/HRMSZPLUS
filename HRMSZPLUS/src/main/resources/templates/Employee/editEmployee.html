@@ -308,8 +308,8 @@
 						<div class="col-12 grid-margin">
 							<div class="card">
 								<div class="card-body">
-									<form class="form-sample" th:action="@{/employee}" th:object="${employee}"
-										method="POST" enctype="multipart/form-data">
+									<form class="form-sample" th:action="@{/employee/edit/{id}(id=${employee.empId})}"
+										th:object="${employee}" method="POST" enctype="multipart/form-data">
 
 
 										<div id="page1">
@@ -709,7 +709,7 @@
 																th:field="*{reference}">
 																<option value="0" disabled selected>Select
 																</option>
-																<option value="None" selected>None
+																<option value="None"  selected>None
 																</option>
 																<option th:each="employeesz : ${allEmployees}"
 																	th:value="${employeesz.empName}"
@@ -727,7 +727,7 @@
 													accept=".pdf" onchange="validateResumeSize(this)">
 												<div class="input-group col-xs-12">
 													<input type="text" class="form-control file-upload-info" disabled=""
-														placeholder="Upload Resume">
+														placeholder="Upload Resume" th:field="*{resumePath}">
 													<span class="input-group-append">
 														<button class="file-upload-browse btn btn-primary"
 															type="button">Upload</button>
@@ -741,7 +741,7 @@
 													accept="image/*" onchange="validateProfilePhotoSize(this)">
 												<div class="input-group col-xs-12">
 													<input type="text" class="form-control file-upload-info" disabled=""
-														placeholder="Upload Image">
+														placeholder="Upload Image" th:field="*{profileImageData}">
 													<span class="input-group-append">
 														<button class="file-upload-browse btn btn-primary"
 															type="button">Upload</button>

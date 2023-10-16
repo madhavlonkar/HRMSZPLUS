@@ -20,12 +20,14 @@
 	<div class="container-scroller">
 		<nav class="sidebar sidebar-offcanvas" id="sidebar">
 
+			<!-- Corona logo-->
 			<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-				<a class="sidebar-brand brand-logo" href="/dashboard"><img
-						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
+				<a class="sidebar-brand brand-logo" href="/dashboard"><img src="../../DashboardC/assets/images/logo.png"
+						alt="logo" /></a>
 				<a class="sidebar-brand brand-logo-mini" href="/dashboard"><img
 						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
 			</div>
+
 			<ul class="nav">
 				<li class="nav-item profile">
 					<div class="profile-desc">
@@ -43,7 +45,7 @@
 					</div>
 				</li>
 				<li class="nav-item nav-category"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
 					<span class="nav-link">Payroll System</span>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
@@ -104,7 +106,7 @@
 					</a>
 				</li>
 				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' }">
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee' }">
 					<a class="nav-link" href="../../pages/icons/mdi.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-contacts"></i>
@@ -112,8 +114,16 @@
 						<span class="menu-title">Salary Slips</span>
 					</a>
 				</li>
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="/getEmpAllowance">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Assign Allowance</span>
+					</a>
+				</li>
 				<li class="nav-item nav-category"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager'}">
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
 					<span class="nav-link">Attendance System</span>
 				</li>
 				<li class="nav-item menu-items"
@@ -126,8 +136,9 @@
 					</a>
 				</li>
 				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='Manager'}">
-					<a class="nav-link" href="/leaves">
+					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='Manager'|| session.otpVerifiedUserRole =='Employee'}">
+					<a class="nav-link"
+						th:href="${session.otpVerifiedUserRole == 'Employee' ? '/leaves/new' : '/leaves'}">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
 						</span>
@@ -144,7 +155,7 @@
 					</a>
 				</li>
 				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager'}">
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -175,7 +186,7 @@
 					</a>
 				</li>
 				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -265,20 +276,19 @@
 													<th> Leave To </th>
 													<th> Leave Description </th>
 													<th> Leave Status </th>
-													<th> Action </th>
+													<th th:if="${session.otpVerifiedUserRole != 'Employee'}"> Action
+													</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="leave: ${leaves}">
 													<td th:text="${leave.leaveId}">
-														<<td>
-
 													<td th:text="${leave.leaveFrom}"></td>
 													<td th:text="${leave.leaveTo}"></td>
-
 													<td th:text="${leave.leaveDescription}"></td>
 													<td th:text="${leave.leaveStatus}"></td>
-													<td>
+
+													<td th:if="${session.otpVerifiedUserRole != 'Employee'}">
 														<a class="btn btn-outline-success btn-fw"
 															style="min-width: 56px;"
 															th:href="@{/leaves/edit/{id}(id=${leave.leaveId})}">Action</a>

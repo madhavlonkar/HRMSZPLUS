@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -68,9 +67,8 @@ public class EmployeeMaster {
     private String emergencyContactContact;
     
     
-    @OneToOne
-    @JoinColumn(name="refemp_id")
-    private EmployeeMaster reference;
+    
+    private String reference;
     
     @Column(name = "resume_path")
     private String resumePath;
@@ -239,12 +237,7 @@ public class EmployeeMaster {
 	public void setEmergencyContactContact(String emergencyContactContact) {
 		this.emergencyContactContact = emergencyContactContact;
 	}
-	public EmployeeMaster getReference() {
-		return reference;
-	}
-	public void setReference(EmployeeMaster reference) {
-		this.reference = reference;
-	}
+	
 	public String getResumePath() {
 		return resumePath;
 	}
@@ -281,15 +274,23 @@ public class EmployeeMaster {
 	public void setDrugTestingConsent(String drugTestingConsent) {
 		this.drugTestingConsent = drugTestingConsent;
 	}
+	
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+	
+	
 	public EmployeeMaster(long empId, String empName, String currentAddress, String permanentAddress, Date dateOfBirth,
 			String gender, String employeeEmail, String employeeContactNo, String maritalStatus, String state,
 			String employeePan, DesignationMaster designation, DepartmentMaster department, Date dateOfJoining,
 			String employmentType, BankMaster bank, String bankAccountNumber, String bankIFSC, String highestEducation,
 			String collegeUniversityName, String areaOfStudy, Date dateOfGraduation, String emergencyContactName,
 			String emergencyContactRelation, String emergencyContactAddress, String emergencyContactContact,
-			EmployeeMaster reference, String resumePath, String profileImageData,
-			String employmentEligibilityVerification, String ndaConsent, String criminalBackgroundCheckConsent,
-			String drugTestingConsent) {
+			String reference, String resumePath, String profileImageData, String employmentEligibilityVerification,
+			String ndaConsent, String criminalBackgroundCheckConsent, String drugTestingConsent) {
 		super();
 		this.empId = empId;
 		this.empName = empName;

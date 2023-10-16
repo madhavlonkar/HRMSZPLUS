@@ -78,4 +78,16 @@ public class EmployeeServiceIMPL implements EmployeeService{
 		
 	}
 
+	@Override
+	public void updateEmployee(EmployeeMaster employee) {
+		try {
+			employeedao.save(employee);
+			return;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+	}
+
 }

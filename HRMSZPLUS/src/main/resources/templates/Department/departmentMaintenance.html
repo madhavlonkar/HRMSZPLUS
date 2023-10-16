@@ -31,12 +31,15 @@
 	<div class="container-scroller">
 		<!-- partial:DashboardC/partials/_sidebar.html -->
 		<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+			<!-- Corona logo-->
 			<div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
 				<a class="sidebar-brand brand-logo" href="/dashboard"><img
 						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
 				<a class="sidebar-brand brand-logo-mini" href="/dashboard"><img
 						src="../../DashboardC/assets/images/logo.png" alt="logo" /></a>
 			</div>
+
 			<ul class="nav">
 				<li class="nav-item profile">
 					<div class="profile-desc">
@@ -53,8 +56,7 @@
 						</div>
 					</div>
 				</li>
-				<li class="nav-item nav-category"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item nav-category" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
 					<span class="nav-link">Payroll System</span>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
@@ -73,8 +75,7 @@
 						<span class="menu-title">Deduction</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
 					<a class="nav-link" href="/employees">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -114,8 +115,7 @@
 						<span class="menu-title">Users</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' }">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee' }">
 					<a class="nav-link" href="../../pages/icons/mdi.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-contacts"></i>
@@ -123,12 +123,18 @@
 						<span class="menu-title">Salary Slips</span>
 					</a>
 				</li>
-				<li class="nav-item nav-category"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='HR'}">
+					<a class="nav-link" href="../../pages/icons/mdi.html">
+						<span class="menu-icon">
+							<i class="mdi mdi-contacts"></i>
+						</span>
+						<span class="menu-title">Assign Allowance</span>
+					</a>
+				</li>
+				<li class="nav-item nav-category" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
 					<span class="nav-link">Attendance System</span>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
 					<a class="nav-link" href="/holidays">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -136,17 +142,15 @@
 						<span class="menu-title">Holidays</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='Manager'}">
-					<a class="nav-link" href="/leaves">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='Manager'|| session.otpVerifiedUserRole =='Employee'}">
+					<a class="nav-link" th:href="${session.otpVerifiedUserRole == 'Employee' ? '/leaves/new' : '/leaves'}">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
 						</span>
 						<span class="menu-title">Leaves</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin' || session.otpVerifiedUserRole =='HR'}">
 					<a class="nav-link" href="/workdays">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -154,8 +158,7 @@
 						<span class="menu-title">WorkDays</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='Employee'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -163,12 +166,10 @@
 						<span class="menu-title">Attendance Report</span>
 					</a>
 				</li>
-				<li class="nav-item nav-category"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item nav-category" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
 					<span class="nav-link">Human Resource Management</span>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -176,8 +177,7 @@
 						<span class="menu-title">Open Projects</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>
@@ -185,8 +185,7 @@
 						<span class="menu-title">Demand</span>
 					</a>
 				</li>
-				<li class="nav-item menu-items"
-					th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR'}">
+				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'|| session.otpVerifiedUserRole =='Manager' || session.otpVerifiedUserRole =='HR' || session.otpVerifiedUserRole =='Employee'}">
 					<a class="nav-link" href="../../pages/tables/basic-table.html">
 						<span class="menu-icon">
 							<i class="mdi mdi-table-large"></i>

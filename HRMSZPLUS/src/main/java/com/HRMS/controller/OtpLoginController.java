@@ -11,12 +11,16 @@ import com.HRMS.model.LoginMaster;
 import com.HRMS.model.OtpLoginMaster;
 import com.HRMS.service.LoginService;
 import com.HRMS.service.OtpLoginService;
+import com.HRMS.utility.EmailService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class OtpLoginController {
 
+	@Autowired
+	private EmailService email;
+	
 	@Autowired
 	private LoginService loginservice;
 	
@@ -68,7 +72,7 @@ public class OtpLoginController {
 			}
 			session.setAttribute("otpVerifiedUserRole", findByUsername.getRole());
 			otploginservice.resetFailedAttemp(loggedInUsername);
-			
+			email.sendEmailOnSuccessfulLogin(findByUsername.getEmail());
 //			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUser"));
 //			System.out.print("User Logged in is :"+session.getAttribute("otpVerifiedUserRole"));
 //			session.invalidate();

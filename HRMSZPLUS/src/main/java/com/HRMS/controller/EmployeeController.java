@@ -119,6 +119,40 @@ public class EmployeeController {
 	        }
 	    
 	}
+	
+	@GetMapping("/employee/edit/{id}")
+	public String createUpdatePage(@PathVariable("id") int id,Model model)
+	{
+		EmployeeMaster findById = employeeservice.findById(id);
+		model.addAttribute("employee",findById);
+		return "Employee/editEmployee";
+	}
+	
+	@PostMapping("/employee/edit/{id}")
+	public String updateEmployee(@PathVariable("id") int id,@ModelAttribute("employee") EmployeeMaster employee)
+	{
+		try {
+			EmployeeMaster findById = employeeservice.findById(id);
+			if(findById==null)
+			{
+				log.error("Employee with ID " + id + " not found.");
+			}
+			else
+			{
+				employee.setEmpId(id);
+				employeeservice.updateEmployee(employee);
+			}
+			
+		}
+		catch(Exception e)
+		{
+			log.error("Failed to update employee with ID " + id, e);
+			e.printStackTrace();
+			return "redirect:/employees";
+		}
+		
+		return "redirect:/employees";
+	}
 
 
 	
