@@ -39,7 +39,7 @@ public class EmailService{
 //            File attachment = new File(attachmentPath);
 //            helper.addAttachment(attachment.getName(), attachment);
 
-//			mailSender.send(message);
+			mailSender.send(message);
 			log.info("Mail Sent Successfully");
 
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class EmailService{
 	                + "<p>Here's a description of what has actually happened...</p>";
 	        helper.setText(messageBody);
 		
-//			mailSender.send(message);
+			mailSender.send(message);
 			log.info("Mail Sent Successfully");
 
 		} catch (Exception e) {
@@ -96,7 +96,7 @@ public class EmailService{
 	                + "take these matters very seriously.</p>";
 	        helper.setText(messageBody);
 		
-//			mailSender.send(message);
+			mailSender.send(message);
 			log.info("Mail Sent Successfully");
 
 		} catch (Exception e) {
