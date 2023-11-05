@@ -22,6 +22,10 @@ public class AllowanceController {
 
 	@Autowired
 	private AllowanceService allowanceService; //comment
+	
+	public void setAllowanceService(AllowanceService allowanceService) {
+	    this.allowanceService = allowanceService;
+	}
 
 	@GetMapping("/allowances")
 	public String getAllAllowances(Model model) {

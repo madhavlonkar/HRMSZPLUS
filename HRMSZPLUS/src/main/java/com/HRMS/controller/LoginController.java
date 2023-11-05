@@ -1,6 +1,7 @@
 package com.HRMS.controller;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,14 @@ public class LoginController {
 	
 	@Autowired
 	private OtpLoginService otploginservice;
+	
+	public boolean validateUsername(String username, String usernameRegex) {
+        return Pattern.matches(usernameRegex, username);
+    }
+
+    public boolean validatePassword(String password, String passwordRegex) {
+        return Pattern.matches(passwordRegex, password);
+    }
 
 	@GetMapping("/login")
 	public String showLoginPage(Model model,HttpSession session) {
