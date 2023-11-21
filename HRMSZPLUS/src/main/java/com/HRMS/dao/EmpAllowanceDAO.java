@@ -14,5 +14,6 @@ public interface EmpAllowanceDAO extends CrudRepository<EmpAllowanceMaster, Long
     
 	List<EmpAllowanceMaster> findByEmployeeEmpId(Long employeeId);
 
+	
 //	void deleteById(int id);
 }

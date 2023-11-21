@@ -61,11 +61,11 @@
 					<span class="nav-link">Payroll System</span>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
-					<a class="nav-link" href="/allowances">
+					<a class="nav-link" href="/deductions">
 						<span class="menu-icon">
 							<i class="mdi mdi-speedometer"></i>
 						</span>
-						<span class="menu-title">Allowance</span>
+						<span class="menu-title">Deduction</span>
 					</a>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
@@ -131,7 +131,7 @@
 						<span class="menu-icon">
 							<i class="mdi mdi-contacts"></i>
 						</span>
-						<span class="menu-title">Assign Allowance</span>
+						<span class="menu-title">Assign Deduction</span>
 					</a>
 				</li>
 				<li class="nav-item nav-category"
@@ -287,7 +287,6 @@
 					<div class="page-header">
 						<h6>Employee Name: <span class="text-success" th:text="${employee.empName}"></span></h6>
 					</div>
-
 					<div class="row">
 						<div class="col-12 grid-margin">
 							<div class="card">
@@ -297,33 +296,33 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>Allowance ID</th>
-													<th>Allowance Name</th>
-													<th>Amount</th>
+													<th>Deduction ID</th>
+													<th>Deduction Name</th>
+													<th>Percent</th>
 													<th> View </th>
 													<th> Edit </th>
 													<th> Delete </th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="empAllowance : ${employeeAllowances}">
-													<td th:text="${empAllowance.allowance.allowanceId}"></td>
-													<td th:text="${empAllowance.allowance.allowanceName}"></td>
-													<td th:text="${empAllowance.amount}"></td>
+												<tr th:each="deduction : ${employeeDeductions}">
+													<td th:text="${deduction.deduction.deductionId}"></td>
+													<td th:text="${deduction.deduction.deductionName}"></td>
+													<td th:text="${deduction.amount}"></td>
 													<td>
 														<a class="btn btn-outline-primary btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/getEmpAllowance/{id}(id=${empAllowance.id})}">View</a>
+															th:href="@{/empDeduction/delete/{id}(id=${deduction.id})}">View</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-success btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/empAllowance/edit/{id}(id=${empAllowance.id}, empId=${employee.empId})}">Edit</a>
+															th:href="@{/empDeduction/edit/{id}(id=${deduction.id}, empId=${employee.empId})}">Edit</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-danger btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/empAllowance/delete/{id}(id=${empAllowance.id}, empId=${employee.empId})}">Delete</a>
+															th:href="@{/empDeduction/delete/{id}(id=${deduction.id}, empId=${employee.empId})}">Delete</a>
 													</td>
 												</tr>
 											</tbody>
@@ -340,8 +339,8 @@
 
 						<button type="button" class="btn btn-success btn-fw text-center"
 							style="display: block; margin: 0 auto;"
-							onclick="location.href='/empAllowance/new/' + employee.empId">
-							Assign Allowances
+							onclick="location.href='empDeduction/new/' + employee.empId">
+							Assign Deductions
 						</button>
 
 

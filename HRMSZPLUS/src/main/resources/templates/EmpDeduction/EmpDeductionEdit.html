@@ -61,11 +61,11 @@
 					<span class="nav-link">Payroll System</span>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
-					<a class="nav-link" href="/allowances">
+					<a class="nav-link" href="/deductions">
 						<span class="menu-icon">
 							<i class="mdi mdi-speedometer"></i>
 						</span>
-						<span class="menu-title">Allowance</span>
+						<span class="menu-title">Deduction</span>
 					</a>
 				</li>
 				<li class="nav-item menu-items" th:if="${session.otpVerifiedUserRole =='Admin'}">
@@ -131,7 +131,7 @@
 						<span class="menu-icon">
 							<i class="mdi mdi-contacts"></i>
 						</span>
-						<span class="menu-title">Assign Allowance</span>
+						<span class="menu-title">Assign Deduction</span>
 					</a>
 				</li>
 				<li class="nav-item nav-category"
@@ -281,72 +281,73 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="page-header">
-						<h6>Employee ID: <span class="text-success" th:text="${employee.empId}"></span></h6>
-
+						<h3 class="page-title"> Deduction Maintenance </h3>
 					</div>
-					<div class="page-header">
-						<h6>Employee Name: <span class="text-success" th:text="${employee.empName}"></span></h6>
-					</div>
-
 					<div class="row">
 						<div class="col-12 grid-margin">
 							<div class="card">
 								<div class="card-body">
-									<!-- <h4 class="card-title">Order Status</h4>  -->
-									<div class="table-responsive">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Allowance ID</th>
-													<th>Allowance Name</th>
-													<th>Amount</th>
-													<th> View </th>
-													<th> Edit </th>
-													<th> Delete </th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="empAllowance : ${employeeAllowances}">
-													<td th:text="${empAllowance.allowance.allowanceId}"></td>
-													<td th:text="${empAllowance.allowance.allowanceName}"></td>
-													<td th:text="${empAllowance.amount}"></td>
-													<td>
-														<a class="btn btn-outline-primary btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/getEmpAllowance/{id}(id=${empAllowance.id})}">View</a>
-													</td>
-													<td>
-														<a class="btn btn-outline-success btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/empAllowance/edit/{id}(id=${empAllowance.id}, empId=${employee.empId})}">Edit</a>
-													</td>
-													<td>
-														<a class="btn btn-outline-danger btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/empAllowance/delete/{id}(id=${empAllowance.id}, empId=${employee.empId})}">Delete</a>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<form class="form-sample" th:action="@{/empDeduction}" th:object="${empDeduction}"
+										method="POST">
 
-									</div>
+										<input type="hidden" name="empId" th:value="${empDeduction.employee.empId}" />
+
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Percent</label>
+													<div class="col-sm-9">
+														<input type="text" name="amount" id="amount"
+															class="form-control" th:field="*{amount}"
+															th:value="${empDeduction.amount}" />
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Select Deduction</label>
+													<div class="col-sm-9">
+														<select class="form-control" style="color: white;"
+															th:field="*{deduction.deductionId}">
+															<option value="0" disabled selected>Select</option>
+															<option th:each="deduction : ${Alldeductions}"
+																th:value="${deduction.deductionId}"
+																th:text="${deduction.deductionName}">
+															</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br>
+										<center>
+											<input type="submit" class="btn btn-success btn-rounded btn-fw">
+											<button type="button" class="btn btn-primary btn-rounded btn-fw"
+												onclick="redirectToEmpDeductions()">
+												Back
+											</button>
+
+											<script>
+												function redirectToEmpDeductions() {
+													var empId = [[${empDeduction.employee.empId}]]; // Make sure this value is correctly populated
+
+													// Check if empId is valid, then redirect
+													if (empId !== null && empId !== undefined && empId !== "") {
+														window.location.href = '/getEmpDeductions/' + empId;
+													} else {
+														alert("EmpId is not valid."); // Show an alert for debugging purposes
+													}
+												}
+											</script>
+
+
+
+										</center>
+									</form>
 								</div>
 							</div>
 						</div>
-
-						<script th:inline="javascript">
-							var employee = /*[[${employee}]]*/ {};
-						</script>
-
-						<button type="button" class="btn btn-success btn-fw text-center"
-							style="display: block; margin: 0 auto;"
-							onclick="location.href='/empAllowance/new/' + employee.empId">
-							Assign Allowances
-						</button>
-
-
-
-
 					</div>
 				</div>
 				<!-- partial -->

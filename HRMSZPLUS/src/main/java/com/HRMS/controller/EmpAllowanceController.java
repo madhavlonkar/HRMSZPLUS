@@ -40,7 +40,7 @@ public class EmpAllowanceController {
 	@GetMapping("/getEmpAllowances/{id}")
 	public String getEmployeeAllowances(@PathVariable("id") long id, Model model,
 			RedirectAttributes redirectAttributes) {
-
+               
 		EmployeeMaster employee = employeeService.findById(id);
 
 		if (employee != null) {
@@ -55,9 +55,22 @@ public class EmpAllowanceController {
 		} else {
 			// Handle the case when the employee does not exist
 			model.addAttribute("errorMessage", "Employee not found");
-			return "EmpAllowance/EmpAllowanceMaintenance"; // You should have an error template for displaying the
+			return "EmpAllowance/error"; // You should have an error template for displaying the
 																// error message.
 		}
+	}
+	
+	@GetMapping("/getEmpAllowance/{id}")
+	public String viewEmployeeAllowance(@PathVariable("id") long id, Model model) {
+	    // Retrieve the details of the specific allowance by id
+	    EmpAllowanceMaster empAllowance = empAllowanceService.getAllowanceById(id);
+
+//	    EmployeeMaster employee = employeeService.findById();
+	    // Add the allowance details to the model
+	    model.addAttribute("allowance", empAllowance);
+
+	    // Return the view page (e.g., "viewEmpAllowance")
+	    return "EmpAllowance/EmpAllowanceView";
 	}
 	
 	@GetMapping("empAllowance/new/{empid}")
@@ -71,7 +84,7 @@ public class EmpAllowanceController {
 		empallowance.setEmployee(employee);
 		model.addAttribute("empallowance", empallowance);
 		model.addAttribute("Allallowances", allowances);
-		return "/EmpAllowance/EmpAllowancneAdd";
+		return "/EmpAllowance/EmpAllowanceAdd";
 	}
 	
 	@PostMapping("/empAllowance")
@@ -88,13 +101,13 @@ public class EmpAllowanceController {
 	}
 	
 	
-	@GetMapping("/empAllowance/edit/{id}")
-	public String editEmpAllowance(@PathVariable("empid") long empid ,Model model) {
+	@GetMapping("/empAllowance/edit/{empId}")
+	public String editEmpAllowance(@PathVariable("empId") long empId ,Model model) {
           
 		EmpAllowanceMaster empallowance =new EmpAllowanceMaster();
 		List<AllowanceMaster> allowances = allowanceservice.getAllAllowances();
 		EmployeeMaster employee = new EmployeeMaster();
-        employee.setEmpId(empid);
+        employee.setEmpId(empId);
 	    
 		empallowance.setEmployee(employee);
 		model.addAttribute("empallowance", empallowance);

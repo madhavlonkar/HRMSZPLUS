@@ -16,6 +16,7 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 	@Autowired
 	private EmpAllowanceDAO empAllowanceDAO;
 	
+	
 	@Override
 	public EmpAllowanceMaster findById(long id) {
 		try
@@ -28,7 +29,7 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 			return null;
 		}
 	}
-
+  
 	@Override
 	public List<EmpAllowanceMaster> getEmployeeAllowancesById(long id) {
 	    List<EmpAllowanceMaster> allowances;
@@ -62,6 +63,19 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public EmpAllowanceMaster getAllowanceById(long id) {
+		try
+		{
+			return empAllowanceDAO.findById(id).get();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 

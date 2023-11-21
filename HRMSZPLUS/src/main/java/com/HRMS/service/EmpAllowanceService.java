@@ -18,4 +18,8 @@ public interface EmpAllowanceService {
 	
 	EmpAllowanceMaster saveEmployee(EmpAllowanceMaster empallowance);
 
+
+
+	EmpAllowanceMaster getAllowanceById(long id);
+
 }

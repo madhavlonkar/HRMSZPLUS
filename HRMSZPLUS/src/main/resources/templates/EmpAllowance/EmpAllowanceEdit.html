@@ -328,9 +328,10 @@
 												Back
 											</button>
 
-											<script>
+											<script th:inline="javascript">
+												/*<![CDATA[*/
 												function redirectToEmpAllowances() {
-													var empId = [[${empallowance.employee.empId}]]; // Make sure this value is correctly populated
+													var empId = /*[[${empallowance.employee.empId}]]*/ null; // Ensure this value is correctly populated
 
 													// Check if empId is valid, then redirect
 													if (empId !== null && empId !== undefined && empId !== "") {
@@ -339,6 +340,7 @@
 														alert("EmpId is not valid."); // Show an alert for debugging purposes
 													}
 												}
+    /*]]>*/
 											</script>
 
 
