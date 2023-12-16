@@ -90,7 +90,7 @@ public class EmpDeductionController {
 	}
 	
 	
-	@GetMapping("/empDeduction/edit/{id}")
+	@GetMapping("/empDeduction/edit/{empid}")
 	public String editEmpDeduction(@PathVariable("empid") long empid ,Model model) {
           
 		EmpDeductionMaster empdeduction =new EmpDeductionMaster();
@@ -99,7 +99,7 @@ public class EmpDeductionController {
         employee.setEmpId(empid);
 	    
 		empdeduction.setEmployee(employee);
-		model.addAttribute("empdeduction", empdeduction);
+		model.addAttribute("empDeduction", empdeduction);
 		model.addAttribute("Alldeduction", deductions);
 
 		return "/EmpDeduction/EmpDeductionEdit";

@@ -305,25 +305,22 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="deduction : ${employeeDeductions}">
-													<td th:text="${deduction.deduction.deductionId}"></td>
-													<td th:text="${deduction.deduction.deductionName}"></td>
-													<td th:text="${deduction.amount}"></td>
-													<td>
-														<a class="btn btn-outline-primary btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/empDeduction/delete/{id}(id=${deduction.id})}">View</a>
-													</td>
-													<td>
-														<a class="btn btn-outline-success btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/empDeduction/edit/{id}(id=${deduction.id}, empId=${employee.empId})}">Edit</a>
-													</td>
-													<td>
-														<a class="btn btn-outline-danger btn-fw"
-															style="min-width: 56px;"
-															th:href="@{/empDeduction/delete/{id}(id=${deduction.id}, empId=${employee.empId})}">Delete</a>
-													</td>
+												<tr th:each="deductions : ${employeeDeductions}">
+        <td th:text="${deductions.deduction != null ? deductions.deduction.deductionId : ''}"></td>
+        <td th:text="${deductions.deduction != null ? deductions.deduction.deductionName : ''}"></td>
+        <td th:text="${deductions.amount}"></td>
+        <td>
+            <a class="btn btn-outline-primary btn-fw" style="min-width: 56px;"
+                th:href="@{/empDeduction/delete/{id}(id=${deductions.id})}">View</a>
+        </td>
+        <td>
+            <a class="btn btn-outline-success btn-fw" style="min-width: 56px;"
+                th:href="@{/empDeduction/edit/{id}(id=${deductions.id}, empId=${employee.empId})}">Edit</a>
+        </td>
+        <td>
+            <a class="btn btn-outline-danger btn-fw" style="min-width: 56px;"
+                th:href="@{/empDeduction/delete/{id}(id=${deductions.id}, empId=${employee.empId})}">Delete</a>
+        </td>
 												</tr>
 											</tbody>
 										</table>
@@ -339,7 +336,7 @@
 
 						<button type="button" class="btn btn-success btn-fw text-center"
 							style="display: block; margin: 0 auto;"
-							onclick="location.href='empDeduction/new/' + employee.empId">
+							onclick="location.href='/empDeduction/new/' + employee.empId">
 							Assign Deductions
 						</button>
 

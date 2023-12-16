@@ -287,7 +287,6 @@
 					<div class="page-header">
 						<h6>Employee Name: <span class="text-success" th:text="${employee.empName}"></span></h6>
 					</div>
-
 					<div class="row">
 						<div class="col-12 grid-margin">
 							<div class="card">
@@ -313,7 +312,7 @@
 													<td>
 														<a class="btn btn-outline-primary btn-fw"
 															style="min-width: 56px;"
-															th:href="@{/getEmpAllowance/{id}(id=${empAllowance.id})}">View</a>
+															th:href="@{/empAllowance/delete/{id}(id=${empAllowance.id})}">View</a>
 													</td>
 													<td>
 														<a class="btn btn-outline-success btn-fw"
