@@ -19,6 +19,7 @@ import com.HRMS.model.DeductionMaster;
 import com.HRMS.model.EmpDeductionMaster;
 import com.HRMS.model.EmployeeMaster;
 import com.HRMS.service.DeductionService;
+import com.HRMS.service.EmpAllowanceService;
 import com.HRMS.service.EmpDeductionService;
 import com.HRMS.service.EmployeeService;
 
@@ -33,6 +34,9 @@ public class EmpDeductionController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private EmpAllowanceService empAllowanceService;
 
 	@GetMapping("/getEmpDeduction")
 	public String showEmployeeIdForm() {
@@ -130,6 +134,9 @@ public class EmpDeductionController {
 
 		EmpDeductionMaster editWithDeductionidAndEmployeeid = empDeductionService
 				.getDataWithDeductionidAndEmployeeid(deductionId, empId);
+		
+		double calculatedPercentage = empAllowanceService.calculatePercentage(editWithDeductionidAndEmployeeid.getAmount(), editWithDeductionidAndEmployeeid.getEmployee().getEmpId());
+		editWithDeductionidAndEmployeeid.setAmount(calculatedPercentage);
 		model.addAttribute("employeedata", editWithDeductionidAndEmployeeid);
 		return "/EmpDeduction/EmpDeductionEdit";
 	}

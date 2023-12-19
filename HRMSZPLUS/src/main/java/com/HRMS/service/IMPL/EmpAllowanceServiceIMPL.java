@@ -93,13 +93,14 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 
 	@Override
 	public EmpAllowanceMaster editEmployeeData(EmpAllowanceMaster employeedata) {
-		try {
-//			employeedata.setId(id);
-			EmpAllowanceMaster savedEmployeeData = empAllowanceDAO.save(employeedata);
-			return savedEmployeeData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		if (employeedata.getAllowance().getAllowanceName().equals("Basic")) {
+			return empAllowanceDAO.save(employeedata);
+		} else {
+			EmpAllowanceMaster dataWithAllowanceidAndEmployeeid = getDataWithAllowanceidAndEmployeeid(1,
+					employeedata.getEmployee().getEmpId());
+			double finalAmount = dataWithAllowanceidAndEmployeeid.getAmount() * (employeedata.getAmount() / 100);
+			employeedata.setAmount(finalAmount);
+			return empAllowanceDAO.save(employeedata);
 		}
 	}
 

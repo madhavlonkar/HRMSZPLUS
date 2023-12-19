@@ -116,7 +116,11 @@ public class EmpAllowanceController {
 
 		EmpAllowanceMaster editWithAllowanceidAndEmployeeid = empAllowanceService
 				.getDataWithAllowanceidAndEmployeeid(allowanceId, empId);
-		
+		if(editWithAllowanceidAndEmployeeid.getAllowance().getAllowanceName().equals("Basic"))
+		{
+			model.addAttribute("employeedata", editWithAllowanceidAndEmployeeid);
+			return "/EmpAllowance/EmpAllowanceEdit";
+		}
 		double calculatedPercentage = empAllowanceService.calculatePercentage(editWithAllowanceidAndEmployeeid.getAmount(),editWithAllowanceidAndEmployeeid.getEmployee().getEmpId());
 		editWithAllowanceidAndEmployeeid.setAmount(calculatedPercentage);
 		model.addAttribute("employeedata", editWithAllowanceidAndEmployeeid);
