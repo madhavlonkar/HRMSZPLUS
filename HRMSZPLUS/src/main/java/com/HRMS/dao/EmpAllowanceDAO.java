@@ -10,9 +10,11 @@ import com.HRMS.model.EmpAllowanceMaster;
 
 public interface EmpAllowanceDAO extends CrudRepository<EmpAllowanceMaster, Long> {
 
-	Optional<EmpAllowanceMaster> findById(Integer id);
+	EmpAllowanceMaster findById(int id);
     
 	List<EmpAllowanceMaster> findByEmployeeEmpId(Long employeeId);
+	
+	EmpAllowanceMaster findByAllowanceAllowanceIdAndEmployeeEmpId(long allowanceId, long employeeId);
 
 	
 //	void deleteById(int id);

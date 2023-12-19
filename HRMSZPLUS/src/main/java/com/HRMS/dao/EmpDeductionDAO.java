@@ -9,6 +9,6 @@ import com.HRMS.model.EmpDeductionMaster;
 
 public interface EmpDeductionDAO extends CrudRepository<EmpDeductionMaster, Long> {
 	Optional<EmpDeductionMaster> findById(Integer id);
-    
 	List<EmpDeductionMaster> findByEmployeeEmpId(Long employeeId);
+	EmpDeductionMaster findByDeductionDeductionIdAndEmployeeEmpId(long deductionId, long employeeId);
 }

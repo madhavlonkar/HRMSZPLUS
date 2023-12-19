@@ -287,7 +287,7 @@
 						<div class="col-12 grid-margin">
 							<div class="card">
 								<div class="card-body">
-									<form class="form-sample" th:action="@{/getEmpAllowances/{id}}" method="get"
+									<form class="form-sample" th:action="@{/getEmpAllowance/{id}}" method="get"
 										id="employeeForm">
 										<div class="row">
 											<div class="col-md-12">
@@ -304,9 +304,7 @@
 										<center>
 											<!-- Use JavaScript to update the form action and submit the form -->
 											<input type="button" class="btn btn-success btn-rounded btn-fw"
-												value="Submit" onclick="submitForm()">
-											<button type="button" class="btn btn-primary btn-rounded btn-fw"
-												onclick="window.location.href='/allowances'">Back</button>
+												value="Submit"  onclick="submitForm()">
 										</center>
 									</form>
 								</div>
@@ -325,7 +323,7 @@
 				var employeeId = document.getElementById("EmployeeId").value;
 
 				// Update the form action with the employee ID
-				document.getElementById("employeeForm").action = "/getEmpAllowances/" + employeeId;
+				document.getElementById("employeeForm").action = "/getEmpAllowance/" + employeeId;
 
 				// Submit the form with the updated action
 				document.getElementById("employeeForm").submit();

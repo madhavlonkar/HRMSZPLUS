@@ -287,10 +287,11 @@
 						<div class="col-12 grid-margin">
 							<div class="card">
 								<div class="card-body">
-									<form class="form-sample" th:action="@{/empDeduction}" th:object="${empDeduction}"
+									<form class="form-sample" th:action="@{/editEmpDeduction}" th:object="${employeedata}"
 										method="POST">
 
-										<input type="hidden" name="empId" th:value="${empDeduction.employee.empId}" />
+										<input type="hidden" name="id" th:value="${employeedata.id}" th:field="*{id}" />
+										<input type="hidden" name="empId" th:value="${employeedata.employee.empId}" th:field="*{employee.empId}" />
 
 										<div class="row">
 											<div class="col-md-6">
@@ -299,7 +300,7 @@
 													<div class="col-sm-9">
 														<input type="text" name="amount" id="amount"
 															class="form-control" th:field="*{amount}"
-															th:value="${empDeduction.amount}" />
+															th:value="${employeedata.amount}" />
 													</div>
 												</div>
 											</div>
@@ -309,11 +310,10 @@
 													<label class="col-sm-3 col-form-label">Select Deduction</label>
 													<div class="col-sm-9">
 														<select class="form-control" style="color: white;"
-															th:field="*{deduction.deductionId}">
-															<option value="0" disabled selected>Select</option>
-															<option th:each="deduction : ${Alldeductions}"
-																th:value="${deduction.deductionId}"
-																th:text="${deduction.deductionName}">
+															th:field="*{deduction.deductionId}" readonly>
+															<option
+																th:value="${employeedata.deduction.deductionId}"
+																th:text="${employeedata.deduction.deductionName}" readonly>
 															</option>
 														</select>
 													</div>
@@ -321,25 +321,17 @@
 											</div>
 										</div>
 										<br>
+										<script th:inline="javascript">
+											var employee = /*[[${employeedata.employee}]]*/ {};
+										</script>
 										<center>
 											<input type="submit" class="btn btn-success btn-rounded btn-fw">
 											<button type="button" class="btn btn-primary btn-rounded btn-fw"
-												onclick="redirectToEmpDeductions()">
+												onclick="location.href='/getEmpDeduction/'+ employee.empId">
 												Back
 											</button>
 
-											<script>
-												function redirectToEmpDeductions() {
-													var empId = [[${empDeduction.employee.empId}]]; // Make sure this value is correctly populated
-
-													// Check if empId is valid, then redirect
-													if (empId !== null && empId !== undefined && empId !== "") {
-														window.location.href = '/getEmpDeductions/' + empId;
-													} else {
-														alert("EmpId is not valid."); // Show an alert for debugging purposes
-													}
-												}
-											</script>
+											
 
 
 

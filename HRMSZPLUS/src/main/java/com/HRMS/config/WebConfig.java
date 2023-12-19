@@ -17,7 +17,7 @@
 //    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(sessionValidationInterceptor)
 //                .addPathPatterns("/**")
-//                .excludePathPatterns("/**/login", "/logout", "/otp") // Exclude specific URLs
+//                .excludePathPatterns("/**/login", "/logout", "/otp","/**/forgot_password","/**/verify-otp","/**/resetPassword") // Exclude specific URLs
 //                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.gif",
 //                        "/**/*.svg", "/**/*.ico", "/**/*.woff", "/**/*.woff2","/**/*.ttf","/**/*.map","/**/*.mp3"); // Exclude URLs with specific extensions
 //    }
