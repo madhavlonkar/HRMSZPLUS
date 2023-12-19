@@ -103,4 +103,12 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 		}
 	}
 
+	@Override
+	public double calculatePercentage(double amount,long empId) {
+		EmpAllowanceMaster dataWithAllowanceidAndEmployeeid = getDataWithAllowanceidAndEmployeeid(1,
+				empId);
+		double percentage=(amount/dataWithAllowanceidAndEmployeeid.getAmount())*100;
+		return percentage;
+	}
+
 }

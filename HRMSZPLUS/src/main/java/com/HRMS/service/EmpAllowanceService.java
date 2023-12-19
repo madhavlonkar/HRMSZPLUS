@@ -19,5 +19,7 @@ public interface EmpAllowanceService {
 	EmpAllowanceMaster editEmployeeData(EmpAllowanceMaster employeedata);
 
 	void deleteEmpAllowance(Long id);
+	
+	double calculatePercentage(double d,long l);
 
 }
