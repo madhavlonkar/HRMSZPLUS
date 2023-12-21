@@ -31,11 +31,25 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
-		
+		<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>kernel</artifactId>
+    <version>7.1.15</version>
+</dependency>
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>layout</artifactId>
+    <version>7.1.15</version>
+</dependency>
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>io</artifactId>
+    <version>7.1.15</version>
+</dependency>
 
 		<dependency>
 			<groupId>javazoom</groupId>
-			<artifactId>jlayer</artifactId>
+   			<artifactId>jlayer</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 
