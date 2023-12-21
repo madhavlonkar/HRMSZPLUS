@@ -21,5 +21,7 @@ public interface EmpAllowanceService {
 	void deleteEmpAllowance(Long id);
 	
 	double calculatePercentage(double d,long l);
+	
+	EmpAllowanceMaster findByAllowanceAllowanceNameAndEmployeeEmpId(String allowanceName, long employeeId );
 
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
+import com.HRMS.utility.NumberToString;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import com.HRMS.dao.EmpAllowanceDAO;
 import com.HRMS.dao.EmpDeductionDAO;
 import com.HRMS.dao.EmployeeDAO;
+import com.HRMS.model.EmpAllowanceMaster;
+import com.HRMS.model.EmpDeductionMaster;
 import com.HRMS.model.EmployeeMaster;
 import com.HRMS.service.EmpAllowanceService;
 import com.HRMS.service.EmpDeductionService;
@@ -71,14 +75,51 @@ public class SalarySlipServiceImpl implements SalarySlipService {
 	      Month currentMonth = currentdate.getMonth();
 		
 	      
-	      int Professional_Tax = 0,Advance = 0,Other_Deductions = 0;
-	      int Basic = 0,HRA = 0,DA = 0,Medical_Allowance=0,Special_Allowance=0,Performance_Bonus=0;
+	      double Professional_Tax = 0,Advance = 0,Other_Deductions = 0;
+	      double Basic = 0,HRA = 0,DA = 0,Medical_Allowance=0,Special_Allowance=0,Performance_Bonus=0;
     
 		  EmployeeMaster employee = employeeService.findById(empId);
-
+		  
+		  List<EmpAllowanceMaster> employeeAllowances = empAllowanceService.getEmployeeAllowancesById(empId);
+		  for(EmpAllowanceMaster allowance:employeeAllowances) {
+			  if(allowance.getAllowance().getAllowanceName().equals("Basic")) {
+				  Basic=allowance.getAmount();
+			  }
+			  if(allowance.getAllowance().getAllowanceName().equals("HRA")) {
+				  HRA=allowance.getAmount();
+			  }
+			  if(allowance.getAllowance().getAllowanceName().equals("DA")) {
+				  DA=allowance.getAmount();
+			  }
+			  if(allowance.getAllowance().getAllowanceName().equals("Medical Allowance")) {
+				  Medical_Allowance=allowance.getAmount();
+			  }
+			  if(allowance.getAllowance().getAllowanceName().equals("Special Allowance")) {
+				  Special_Allowance=allowance.getAmount();
+			  }
+			  if(allowance.getAllowance().getAllowanceName().equals("Performance Bonus")) {
+				  Performance_Bonus=allowance.getAmount();
+			  }
+		  }
+		  
+		  List<EmpDeductionMaster> employeeDeductions = empDeductionService.getEmployeeDeductionsById(empId);
+		  for(EmpDeductionMaster deduction:employeeDeductions) {
+			  if(deduction.getDeduction().getDeductionName().equals("Professional Tax")) {
+				  Professional_Tax=deduction.getAmount();
+			  }
+			  if(deduction.getDeduction().getDeductionName().equals("Advance")) {
+				  Advance=deduction.getAmount();
+			  }
+			  if(deduction.getDeduction().getDeductionName().equals("Other Deductions")) {
+				  Other_Deductions=deduction.getAmount();
+			  }
+			  
+			 
+		  }
 //		// Creating a PdfWriter       
 	      String dest = "D://SalarySlip_"+employee.getEmpName()+"_"+currentdate+".pdf";       
-	      PdfWriter writer = new PdfWriter(dest);           
+	      PdfWriter writer = new PdfWriter(dest);   
+	      
 //	      
 //	      // Creating a PdfDocument       
 	      PdfDocument pdf = new PdfDocument(writer);  
@@ -125,7 +166,7 @@ public class SalarySlipServiceImpl implements SalarySlipService {
 		      
 		      
 		      Cell c2 = new Cell();
-		      Paragraph h2= new Paragraph("Date: ");
+		      Paragraph h2= new Paragraph("Date: "+currentdate);
 		      c2.add(h2);
 		      c2.setBorder(Border.NO_BORDER);
 		      c2.setTextAlignment(TextAlignment.RIGHT);
@@ -432,8 +473,8 @@ public class SalarySlipServiceImpl implements SalarySlipService {
 		      float [] pointColumnWidths5 = {137.5F,137.5F,275F}; 
 		      Table t7 = new Table(pointColumnWidths5);
 		      
-		      int Total_Pay_Allowance=Basic+HRA+DA+Medical_Allowance+Special_Allowance+Performance_Bonus;
-		      int Total_Pay_Deduction=Professional_Tax+Advance+Other_Deductions;
+		      double Total_Pay_Allowance=Basic+HRA+DA+Medical_Allowance+Special_Allowance+Performance_Bonus;
+		      double Total_Pay_Deduction=Professional_Tax+Advance+Other_Deductions;
 		      
 		      Cell ct1 = new Cell();
 		      Paragraph ctotal=new Paragraph("Total Pay");
@@ -467,7 +508,7 @@ public class SalarySlipServiceImpl implements SalarySlipService {
 		      
 		      Table t8 = new Table(pointColumnWidths2);
 		      
-		      int NetPay=Total_Pay_Allowance-Total_Pay_Deduction;
+		      double NetPay=Total_Pay_Allowance-Total_Pay_Deduction;
 		      Cell ct4 = new Cell();
 		      Paragraph Npay=new Paragraph("Net Pay");
 		      ct4.setBackgroundColor(null);
@@ -480,15 +521,14 @@ public class SalarySlipServiceImpl implements SalarySlipService {
 		      ct5.add(Npay);
 		      t8.addCell(ct5);
 		      
-//		      numbertostring ns=new numbertostring();
+		      NumberToString ns=new NumberToString();
 		      Cell ct6 = new Cell();
 		      Paragraph NpayW=new Paragraph("Net Pay in Words :");
 		      ct6.add(NpayW);
 		      t8.addCell(ct6);
 		      
 		      Cell ct7 = new Cell();
-//		      String sw=NumberFormatUtils.format(NetPay);
-		      String sw="12345";
+		      String sw=ns.convertToWords(NetPay);
 		      String Salaryinwords=sw.substring(0,1).toUpperCase()+sw.substring(1);
 		      NpayW=new Paragraph(""+Salaryinwords+" only");
 		      ct7.add(NpayW);

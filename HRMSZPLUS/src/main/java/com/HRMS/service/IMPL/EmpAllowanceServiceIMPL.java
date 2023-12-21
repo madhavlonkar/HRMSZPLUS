@@ -112,4 +112,16 @@ public class EmpAllowanceServiceIMPL implements EmpAllowanceService {
 		return percentage;
 	}
 
+	@Override
+	public EmpAllowanceMaster findByAllowanceAllowanceNameAndEmployeeEmpId(String allowanceName, long employeeId) {
+		try {
+			
+			return empAllowanceDAO.findByAllowanceAllowanceNameAndEmployeeEmpId(allowanceName,employeeId);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
 }
