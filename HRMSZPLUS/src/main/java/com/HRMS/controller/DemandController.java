@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,16 +32,28 @@ public class DemandController {
 	@Autowired
 	private DemandService demandService;
 
-	@GetMapping("/openDemands")
-	public String getAllOpenDemands(Model model) {
+	@GetMapping("/allDemands")
+	public String getAllDemands(Model model) {
+
 		List<DemandMaster> allDemands = demandService.getAllDemands();
-		model.addAttribute("allDemands", allDemands);
-		return "Demands/openDemands";
+        
+        if (allDemands.isEmpty()) {
+            model.addAttribute("errorMessage", "No Demands Available.");
+            return "Demands/allDemands";
+        }
+
+        model.addAttribute("allDemands", allDemands);
+        return "Demands/allDemands";
 	}
 
-	@GetMapping("/demandDetail")
-	public String getDemandDetails(Model model) {
-
+	@GetMapping("/demandDetail/{id}")
+	public String getDemandDetails(@PathVariable("id") int demandId, Model model) {
+		DemandMaster demandDetailsById = demandService.getDemandDetailsById(demandId);
+		if(demandDetailsById==null)
+		{
+			return "ErrorPages/ErrorPage";
+		}
+		model.addAttribute("demandDetails", demandDetailsById);
 		return "Demands/DemandDetailsWithCandidatesList";
 	}
 
@@ -61,10 +74,10 @@ public class DemandController {
 	public String createDemand(@ModelAttribute("demand") DemandMaster demand, Model model) {
 		LocalDate currentDate = LocalDate.now();
 		Date sqlDate = Date.valueOf(currentDate);
-		
+
 		DesignationMaster designationById = designationService.findById(demand.getPosition().getDesignationId());
 		demand.setPosition(designationById);
-		
+
 		ProjectMaster projectById = projectService.getProjectById(demand.getProject().getProjectId());
 		demand.setProject(projectById);
 
@@ -73,7 +86,44 @@ public class DemandController {
 
 		DemandMaster savedDemand = demandService.saveDemand(demand);
 //		return savedDemand;
-		return "redirect:/openDemands";
+		return "redirect:/allDemands";
 
 	}
+
+	@GetMapping("/closeDemand/{id}")
+	public String closeDemand(@PathVariable("id") int demandIdToBeClosed) {
+		DemandMaster demandDetailsById = demandService.getDemandDetailsById(demandIdToBeClosed);
+		demandDetailsById.setStatus("Closed");
+		demandService.editDemand(demandDetailsById);
+		return "redirect:/allDemands";
+	}
+
+	@GetMapping("/editDemand/{id}")
+	public String editDemandForm(@PathVariable("id") int demandId, Model model) {
+		DemandMaster demandDetailsById = demandService.getDemandDetailsById(demandId);
+		System.out.print("sssssssssssssssssssssss" + demandDetailsById.getDemandId());
+		model.addAttribute("demand", demandDetailsById);
+		return "Demands/editDemand";
+	}
+
+	@PostMapping("/editDemand")
+	public String editDemand(@ModelAttribute("demand") DemandMaster demand) {
+
+		DesignationMaster designationById = designationService.findById(demand.getPosition().getDesignationId());
+		demand.setPosition(designationById);
+
+		ProjectMaster projectById = projectService.getProjectById(demand.getProject().getProjectId());
+		demand.setProject(projectById);
+
+		DemandMaster editedDemand = demandService.editDemand(demand);
+		System.out.print("ssssssssssssssssssssssssss" + demand.getDemandId());
+		return "redirect:/demandDetail/" + demand.getDemandId();
+	}
+
+	@GetMapping("/deleteAllClosedDemands")
+	public String deleteAllClosedDemands() {
+		demandService.deleteAllClosedDemands();
+		return "redirect:/allDemands";
+	}
+
 }

@@ -8,4 +8,7 @@ public interface DemandService {
 	
 	List<DemandMaster> getAllDemands();
 	DemandMaster saveDemand(DemandMaster demand);
+	DemandMaster getDemandDetailsById(int demandId);
+	DemandMaster editDemand(DemandMaster demandToBeEdited);
+	void deleteAllClosedDemands();
 }

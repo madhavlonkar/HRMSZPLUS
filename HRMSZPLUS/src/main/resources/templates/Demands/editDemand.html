@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,22 +14,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Corona Admin</title>
 	<!-- plugins:css -->
-	<link rel="stylesheet" href="DashboardC/assets/vendors/mdi/css/materialdesignicons.min.css">
-	<link rel="stylesheet" href="DashboardC/assets/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="/DashboardC/assets/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
 	<!-- End Plugin css for this page -->
 	<!-- inject:css -->
 	<!-- endinject -->
 	<!-- Layout styles -->
-	<link rel="stylesheet" href="DashboardC/assets/css/style.css">
+	<link rel="stylesheet" href="/DashboardC/assets/css/style.css">
 	<!-- End layout styles -->
-	<link rel="shortcut icon" href="DashboardC/assets/images/favicon.png" />
+	<link rel="shortcut icon" href="/DashboardC/assets/images/favicon.png" />
 </head>
 
 <body>
 	<div class="container-scroller">
-		<!-- partial:DashboardC/partials/_sidebar.html -->
+		<!-- partial:/DashboardC/partials/_sidebar.html -->
 		<nav class="sidebar sidebar-offcanvas" id="sidebar">
 
 			<!-- Corona logo-->
@@ -44,7 +45,7 @@
 					<div class="profile-desc">
 						<div class="profile-pic">
 							<div class="count-indicator">
-								<img class="img-xs rounded-circle " src="DashboardC/assets/images/faces/face15.jpg"
+								<img class="img-xs rounded-circle " src="/DashboardC/assets/images/faces/face15.jpg"
 									alt="">
 								<span class="count bg-success"></span>
 							</div>
@@ -209,11 +210,11 @@
 		</nav>
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
-			<!-- partial:DashboardC/partials/_navbar.html -->
+			<!-- partial:/DashboardC/partials/_navbar.html -->
 			<nav class="navbar p-0 fixed-top d-flex flex-row">
 				<div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo-mini" href="DashboardC/index.html"><img
-							src="DashboardC/assets/images/logo-mini.svg" alt="logo" /></a>
+					<a class="navbar-brand brand-logo-mini" href="/DashboardC/index.html"><img
+							src="/DashboardC/assets/images/logo-mini.svg" alt="logo" /></a>
 				</div>
 				<div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
 					<button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -243,7 +244,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
 								<div class="navbar-profile">
-									<img class="img-xs rounded-circle" src="DashboardC/assets/images/faces/face15.jpg"
+									<img class="img-xs rounded-circle" src="/DashboardC/assets/images/faces/face15.jpg"
 										alt="">
 									<p class="mb-0 d-none d-sm-block navbar-profile-name"
 										th:text="${session.otpVerifiedUser}"></p>
@@ -276,69 +277,132 @@
 					</button>
 				</div>
 			</nav>
-			<!-- partial -->
+
 			<div class="main-panel">
 				<div class="content-wrapper">
-					<div class="card-body">
-						<div class="d-flex flex-row justify-content-between">
-							<h4 class="card-title mb-1">Open Demands</h4>
-							<p class="text-muted mb-1">Your Demand status</p>
-						</div>
-						<th:block th:each="demand,iterStat  : ${allDemands}">
-							<div class="row">
-								<div class="col-12">
-									<div class="preview-list">
-										<div class="preview-item border-bottom">
-											<div th:switch="${iterStat.index % 5}">
+					<div class="page-header">
+						<h3 class="page-title"> Create Demand</h3>
+					</div>
+					<div class="row">
+						<div class="col-12 grid-margin">
+							<div class="card">
+								<div class="card-body">
+									<form class="form-sample" th:action="@{/editDemand}" th:object="${demand}"
+										method="POST">
 
-												<div class="preview-thumbnail">
-													<div th:case="0" class="preview-icon bg-success">
-														<i class="mdi mdi-cloud-download"></i>
-													</div>
-												</div>
-												<div class="preview-thumbnail">
-													<div th:case="1" class="preview-icon bg-primary">
-														<i class="mdi mdi-file-document"></i>
-													</div>
-												</div>
-												<div class="preview-thumbnail">
-													<div th:case="2" class="preview-icon bg-info">
-														<i class="mdi mdi-clock"></i>
-													</div>
-												</div>
-												<div class="preview-thumbnail">
-													<div th:case="3" class="preview-icon bg-danger">
-														<i class="mdi mdi-email-open"></i>
-													</div>
-												</div>
-												<div class="preview-thumbnail">
-													<div th:case="4" class="preview-icon bg-warning">
-														<i class="mdi mdi-chart-pie"></i>
+										<input type="hidden" name="demandID" th:value="${demand.demandId}" th:field="*{demandId}" />
+											<input type="hidden" name="Status" th:value="${demand.Status}" th:field="*{Status}" />
+											<input type="hidden" name="Date" th:value="${demand.demandDate}" th:field="*{demandDate}" />
+
+										<div class="row">
+											
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Select
+														Project</label>
+													<div class="col-sm-9">
+														<select class="form-control" style="color: white;"
+															th:field="*{Project.projectId}" readonly>
+															<option th:value="${demand.project.projectId}"
+																th:text="${demand.project.projectName}" readonly>
+															</option>
+														</select>
 													</div>
 												</div>
 											</div>
 
-											<div class="preview-item-content d-sm-flex flex-grow">
-												<div class="flex-grow">
-													<a href="/allowances" style="color: white;">
-														<h6 class="preview-subject"
-															th:text="${demand.Position.designationName}">
-														</h6>
-													</a>
-													<p class="text-muted mb-0" th:text="${demand.Project.projectName}">
-													</p>
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Select
+														Position</label>
+													<div class="col-sm-9">
+														<select class="form-control" style="color: white;"
+															th:field="*{Position.designationId}" readonly>
+															<option th:value="${demand.Position.designationId}"
+																th:text="${demand.Position.designationName}" readonly>
+															</option>
+														</select>
+													</div>
 												</div>
-												<div class="mr-auto text-sm-right pt-2 pt-sm-0">
-													<div th:class="${demand.status == 'Opened'} ? 'btn btn-inverse-success btn-fw' : 'btn btn-inverse-danger btn-fw'"
-														th:text="${demand.status}"></div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Required Skiils</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" name="requiredSkills"
+															id="requiredSkills" th:field="*{requiredSkills}" />
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">No of Positions</label>
+													<div class="col-sm-9">
+														<input type="number" name="numberOfPositions"
+															id="numberOfPositions" class="form-control"
+															th:field="*{numberOfPositions}" />
+													</div>
 												</div>
 											</div>
 										</div>
 
-									</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Priority</label>
+													<div class="col-sm-4">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="radio" class="form-check-input"
+																	name="Priority" id="Priority" value="High"
+																	th:field="*{Priority}"> High <i
+																	class="input-helper"></i></label>
+														</div>
+													</div>
+													<div class="col-sm-5">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="radio" class="form-check-input"
+																	name="Priority" id="Priority" value="Low"
+																	th:field="*{Priority}"> Low
+																<i class="input-helper"></i></label>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Descitpion</label>
+													<div class="col-sm-9">
+														<textarea class="form-control" style="color: white;"
+															id="Description" rows="8"
+															th:field="*{Description}"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+										<br>
+										<center>
+											<input type="submit" class="btn btn-success btn-rounded btn-fw">
+
+											<!-- Add multiple non-breaking spaces to create space between the buttons -->
+											<button type="button" class="btn btn-primary btn-rounded btn-fw"
+												onclick="window.location.href='/allowances'">Back</button>
+										</center>
+									</form>
 								</div>
 							</div>
-						</th:block>
+						</div>
 					</div>
 				</div>
 

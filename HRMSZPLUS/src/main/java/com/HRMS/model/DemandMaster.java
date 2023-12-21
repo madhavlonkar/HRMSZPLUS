@@ -103,6 +103,15 @@ public class DemandMaster {
 	public DemandMaster() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "DemandMaster [demandId=" + demandId + ", Project=" + Project + ", demandDate=" + demandDate
+				+ ", Position=" + Position + ", requiredSkills=" + requiredSkills + ", Priority=" + Priority
+				+ ", numberOfPositions=" + numberOfPositions + ", Description=" + Description + ", Status=" + Status
+				+ "]";
+	}
+	
+	
 
 	
 
