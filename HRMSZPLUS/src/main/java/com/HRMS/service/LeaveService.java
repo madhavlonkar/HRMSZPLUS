@@ -1,9 +1,6 @@
 package com.HRMS.service;
 
-import java.time.YearMonth;
 import java.util.List;
-import java.util.Map;
-
 import com.HRMS.model.LeaveMaster;
 
 public interface LeaveService {
@@ -18,5 +15,5 @@ public interface LeaveService {
 	
 	void deleteLeave(int id);
 	
-	public Map<YearMonth, Integer> calculateLeaveDaysByMonth(LeaveMaster leavemaster);
+	 public int calculateTotalLeaveDays(LeaveMaster leavemaster);
 }

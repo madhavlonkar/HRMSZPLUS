@@ -276,8 +276,15 @@
 													<th> Leave To </th>
 													<th> Leave Description </th>
 													<th> Leave Status </th>
-													<th th:if="${session.otpVerifiedUserRole != 'Employee'}"> Action
-													</th>
+													<td
+														th:if="${session.otpVerifiedUserRole != 'Employee' and leave != null}">
+														<a class="btn btn-outline-success btn-fw"
+															style="min-width: 56px;"
+															th:href="@{/leaves/edit/{id}(id=${leave.leaveId})}"
+															onclick="handleButtonClick(this)">
+															Action
+														</a>
+													</td>
 												</tr>
 											</thead>
 											<tbody>
@@ -332,6 +339,45 @@
 		<script src="/DashboardC/assets/js/hoverable-collapse.js"></script>
 		<script src="/DashboardC/assets/js/misc.js"></script>
 		<script src="/DashboardC/assets/js/settings.js"></script>
+
+
+		<script>
+			function handleButtonClick(button) {
+				// Disable the button
+				button.disabled = true;
+
+				// You can also add additional logic here, such as showing a loading spinner
+
+				// After some processing, you might want to enable the button again
+				// For example, you can enable it after a certain timeout
+				setTimeout(function () {
+					button.disabled = false;
+				}, 5000); // Enable the button after 5 seconds (adjust the timeout as needed)
+			}
+		</script>
+
+	<!-- Add this JavaScript function -->
+<script>
+    function handleButtonClick(button) {
+        // Check if the button has already been clicked
+        if (!button.getAttribute('data-clicked')) {
+            // Disable the button
+            button.disabled = true;
+
+            // Set the 'data-clicked' attribute to indicate that the button has been clicked
+            button.setAttribute('data-clicked', true);
+
+            // You can also add additional logic here, such as showing a loading spinner
+
+            // After some processing, you might want to enable the button again (optional)
+            // setTimeout(function () {
+            //     button.disabled = false;
+            // }, 5000); // Enable the button after 5 seconds (adjust the timeout as needed)
+        }
+    }
+</script>
+
+
 </body>
 
 </html>

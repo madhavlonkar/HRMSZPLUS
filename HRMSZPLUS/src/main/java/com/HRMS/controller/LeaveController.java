@@ -94,6 +94,8 @@ public class LeaveController {
 			}
 			else
 			{
+				leavemaster.setLeaveDays(leaveService.calculateTotalLeaveDays(leavemaster));
+
 				leavemaster.setLeaveId(id);
 				leaveService.updateLeave(leavemaster);
 			}
@@ -144,9 +146,5 @@ public class LeaveController {
 
 	    return "redirect:/leaves"; // Redirect back to the leave maintenance page
 	}
-
-
-
 	
-
 }
