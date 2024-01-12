@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.HRMS.dao.CandidateDAO;
 import com.HRMS.model.CandidateMaster;
+import com.HRMS.model.EmployeeMaster;
 import com.HRMS.service.CandidateService;
 
 @Service
@@ -44,6 +45,22 @@ public class CandidateServiceIMPL implements CandidateService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public CandidateMaster addCandidate(CandidateMaster candidate) {
+			
+			try {
+				CandidateMaster save = candidateDao.save(candidate);
+				return save;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+			
 		
 	}
 

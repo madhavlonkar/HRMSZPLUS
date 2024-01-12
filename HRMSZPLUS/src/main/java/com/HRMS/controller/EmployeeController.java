@@ -80,7 +80,9 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/employee")
-	public String addemp(@ModelAttribute("employee") EmployeeMaster employee, @RequestParam("resumeFile") MultipartFile resumeFile, @RequestParam("profilePhoto") MultipartFile profilePhoto) {
+	public String addemp(@ModelAttribute("employee") EmployeeMaster employee, 
+			             @RequestParam("resumeFile") MultipartFile resumeFile, 
+			             @RequestParam("profilePhoto") MultipartFile profilePhoto) {
 		
 		if (!resumeFile.isEmpty()) {
 		    String originalFileName =employee.getEmpName().charAt(0)+"_"+employee.getEmpName()+"_"+resumeFile.getOriginalFilename();

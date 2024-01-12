@@ -9,4 +9,5 @@ public interface CandidateService {
 	List<CandidateMaster> getAllCandidateService();
 	CandidateMaster getCandidateById(int candidateId);
 	void deleteCandidate(int candidateId);
+	CandidateMaster addCandidate(CandidateMaster candidate);
 }
