@@ -13,21 +13,20 @@ public class JobTitleMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobId;
-	private String jobName;
+	private String jobTitle;
 	private String jobDescription;
 	@Override
 	public String toString() {
-		return "JobTitleMaster [jobId=" + jobId + ", jobName=" + jobName + ", jobDescription=" + jobDescription + "]";
+		return "JobTitleMaster [jobId=" + jobId + ", jobName=" + jobTitle + ", jobDescription=" + jobDescription + "]";
 	}
 	public JobTitleMaster(int jobId, String jobName, String jobDescription) {
 		super();
 		this.jobId = jobId;
-		this.jobName = jobName;
+		this.jobTitle = jobName;
 		this.jobDescription = jobDescription;
 	}
 	public JobTitleMaster() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getJobId() {
 		return jobId;
@@ -35,11 +34,11 @@ public class JobTitleMaster {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public String getJobName() {
-		return jobName;
+	public String getJobTitle() {
+		return jobTitle;
 	}
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 	public String getJobDescription() {
 		return jobDescription;

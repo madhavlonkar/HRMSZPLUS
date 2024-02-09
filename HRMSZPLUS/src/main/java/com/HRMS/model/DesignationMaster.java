@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +18,10 @@ public class DesignationMaster {
 	
 	private String designationName;
 	private String designationDescription;
+	
+	@ManyToOne
+	@JoinColumn(name="jobId")
+	private JobTitleMaster jobId;
 	
 	public int getDesignationId() {
 		return designationId;

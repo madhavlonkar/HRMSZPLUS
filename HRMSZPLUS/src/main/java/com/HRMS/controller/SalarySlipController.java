@@ -26,14 +26,6 @@ import jakarta.persistence.EntityNotFoundException;
 @Controller
 public class SalarySlipController {
 	
-	@Autowired
-	private EmpAllowanceService empAllowanceService;
-	
-	@Autowired
-	private EmpDeductionService empDeductionService;
-	
-	@Autowired
-	private EmployeeService employeeService;
 	
 	@Autowired
 	private SalarySlipService salarySlipService;
@@ -45,17 +37,22 @@ public class SalarySlipController {
 	}
 	  
 	  @GetMapping("/generate/{empId}")
-	    public ResponseEntity<InputStreamResource> generateSalarySlip(@PathVariable("empId") Long empId, Model model) throws IOException {
+	    public boolean generateSalarySlip(@PathVariable("empId") Long empId, Model model) throws IOException {
 		        ByteArrayInputStream bis = salarySlipService.generateSalarySlip(empId);
+		        if(bis==null)
+		        {
+		        	return false;
+		        }
+		        return true;
 
-			        HttpHeaders headers = new HttpHeaders();
-		        headers.add("Content-Disposition", "inline; filename=employee.pdf");
-
-		        return ResponseEntity
-		                .ok()
-		                .headers(headers)
-		                .contentType(MediaType.APPLICATION_PDF)
-		                .body(new InputStreamResource(bis));
+//			        HttpHeaders headers = new HttpHeaders();
+//		        headers.add("Content-Disposition", "inline; filename=employee.pdf");
+//
+//		        return ResponseEntity
+//		                .ok()
+//		                .headers(headers)
+//		                .contentType(MediaType.APPLICATION_PDF)
+//		                .body(new InputStreamResource(bis));
 		        
 //		        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 //		        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=employee.pdf");
