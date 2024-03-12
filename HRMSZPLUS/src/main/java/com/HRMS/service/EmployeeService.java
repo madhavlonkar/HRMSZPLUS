@@ -11,5 +11,6 @@ public interface EmployeeService {
 	EmployeeMaster findById(long id);
 	boolean deleteEmployee(long id);
 	void updateEmployee(EmployeeMaster employee);
+	List<EmployeeMaster> getManagers();
 
 }

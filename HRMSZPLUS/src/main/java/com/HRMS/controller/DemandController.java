@@ -78,7 +78,7 @@ public class DemandController {
 		DesignationMaster designationById = designationService.findById(demand.getPosition().getDesignationId());
 		demand.setPosition(designationById);
 
-		ProjectMaster projectById = projectService.getProjectById(demand.getProject().getProjectId());
+		ProjectMaster projectById = projectService.findProjectById(demand.getProject().getProjectId());
 		demand.setProject(projectById);
 
 		demand.setDemandDate(sqlDate);
@@ -112,7 +112,7 @@ public class DemandController {
 		DesignationMaster designationById = designationService.findById(demand.getPosition().getDesignationId());
 		demand.setPosition(designationById);
 
-		ProjectMaster projectById = projectService.getProjectById(demand.getProject().getProjectId());
+		ProjectMaster projectById = projectService.findProjectById(demand.getProject().getProjectId());
 		demand.setProject(projectById);
 
 		DemandMaster editedDemand = demandService.editDemand(demand);

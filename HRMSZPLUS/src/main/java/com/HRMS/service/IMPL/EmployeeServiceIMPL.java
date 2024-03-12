@@ -89,5 +89,10 @@ public class EmployeeServiceIMPL implements EmployeeService{
 			return;
 		}
 	}
+	
+	 @Override
+	    public List<EmployeeMaster> getManagers() {
+	        return employeedao.findManagers(); // Assuming you have a method in EmployeeDAO to fetch managers by designation
+	    }
 
 }
