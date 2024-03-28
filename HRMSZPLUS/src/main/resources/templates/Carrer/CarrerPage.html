@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Job Listing</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" href="carrer/css/font-awesome.min.css">
+<link rel="stylesheet" href="carrer/css/bootstrap.css">
+<link rel="stylesheet" href="carrer/css/animate.min.css">
+<link rel="stylesheet" href="carrer/css/owl.carousel.css">
+<link rel="stylesheet" href="carrer/css/main.css">
+</head>
+<body>
+
+
+
+
+	<!-- start banner Area -->
+	<section class="banner-area relative" id="home">
+		<div class="overlay overlay-bg"></div>
+		<div class="container">
+			<div
+				class="row fullscreen d-flex align-items-center justify-content-center">
+				<div class="banner-content col-lg-12">
+					<h1 class="text-white">
+						<span>Welcome</span> Zplus Cyber Secure Pvt Ltd
+					</h1>
+
+					<p class="text-white">
+						<span>Opening for:</span> Tecnology, Business, Consulting, IT
+						Company, Design, Development
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- Start features Area -->
+	<section class="features-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="single-feature">
+						<h4>Searching</h4>
+						<p>Find what you need quickly.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-feature">
+						<h4>Applying</h4>
+						<p>Apply hassle-free.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-feature">
+						<h4>Interview</h4>
+						<p>Schedule and conduct interviews seamlessly.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="single-feature">
+						<h4>Notifications</h4>
+						<p>Stay updated with important alerts.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- End features Area -->
+
+	<!-- Start popular-post Area -->
+	<section class="popular-post-area pt-100">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="active-popular-post-carusel">
+
+					<div class="single-popular-post d-flex flex-row"
+						th:each="demand : ${allDemands}">
+
+						<div class="details">
+							<h4 th:text="${demand.Position.designationName}"></h4>
+							<br>
+							<p>
+								<span>Location:</span> <span class="address"
+									th:text="${demand.location}"><span class="lnr lnr-map"></span></span>
+							</p>
+							<p>
+								Skills Required: <span th:text="${demand.requiredSkills}"></span>
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- End popular-post Area -->
+
+	<!-- Start feature-cat Area -->
+	<!-- Start feature-cat Area -->
+	<section class="feature-cat-area pt-50" id="category">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content pb-30 col-lg-10">
+					<div class="title text-center">
+						<h1 class="mb-10">Openings</h1>
+						<p>You can check out opening below and apply.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End feature-cat Area -->
+
+	<!-- Start post Area -->
+	<section class="post-area section-gap">
+		<div class="container">
+			<div class="row justify-content-center d-flex">
+				<div class="col-lg-8 post-list">
+					<div class="single-post d-flex flex-row"
+						th:each="demand : ${allDemands}">
+						<div class="details">
+							<div class="title d-flex flex-row justify-content-between">
+								<div class="titles">
+									<h4 th:text="${demand.Position.designationName}"></h4>
+									<h6 th:text="${demand.Project.projectName}"></h6>
+								</div>
+								<ul class="btns">
+									<li><a th:href="@{/carrer/apply/{id}(id=${demand.demandId})}">Apply</a></li>
+								</ul>
+							</div>
+							<p th:text="${demand.Description}"></p>
+							<div>
+								<p>
+									<span>Type:</span> <span th:text="${demand.demandType}"></span>
+								</p>
+								<p>
+									<span>Location:</span> <span class="address"
+										th:text="${demand.location}"><span class="lnr lnr-map"></span></span>
+								</p>
+								<p>
+									<span>Salary:</span> <span class="address"
+										th:text="${demand.salary}"><span
+										class="lnr lnr-database"></span></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- End post Area -->
+
+
+	<!-- Start callto-action Area -->
+	<section class="callto-action-area section-gap" id="join">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content col-lg-9">
+					<div class="title text-center">
+						<h1 class="mb-10 text-white">Join us today without any
+							hesitation</h1>
+						<p class="text-white">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+							exercitation.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End calto-action Area -->
+
+	<!-- Start download Area -->
+
+	<!-- End footer Area -->
+
+	<script src="carrer/js/jquery-2.2.4.min.js"></script>
+	<script src="carrer/js/bootstrap.min.js"></script>
+	<script src="carrer/js/hoverIntent.js"></script>
+	<script src="carrer/js/superfish.min.js"></script>
+	<script src="carrer/js/jquery.magnific-popup.min.js"></script>
+	<script src="carrer/js/owl.carousel.min.js"></script>
+	<script src="carrer/js/main.js"></script>
+</body>
+</html>
+
+
+

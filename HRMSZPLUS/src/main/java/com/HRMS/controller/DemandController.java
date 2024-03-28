@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.HRMS.model.CandidateMaster;
 import com.HRMS.model.DemandMaster;
 import com.HRMS.model.DesignationMaster;
 import com.HRMS.model.ProjectMaster;
@@ -36,21 +37,20 @@ public class DemandController {
 	public String getAllDemands(Model model) {
 
 		List<DemandMaster> allDemands = demandService.getAllDemands();
-        
-        if (allDemands.isEmpty()) {
-            model.addAttribute("errorMessage", "No Demands Available.");
-            return "Demands/allDemands";
-        }
 
-        model.addAttribute("allDemands", allDemands);
-        return "Demands/allDemands";
+		if (allDemands.isEmpty()) {
+			model.addAttribute("errorMessage", "No Demands Available.");
+			return "Demands/allDemands";
+		}
+
+		model.addAttribute("allDemands", allDemands);
+		return "Demands/allDemands";
 	}
 
 	@GetMapping("/demandDetail/{id}")
 	public String getDemandDetails(@PathVariable("id") int demandId, Model model) {
 		DemandMaster demandDetailsById = demandService.getDemandDetailsById(demandId);
-		if(demandDetailsById==null)
-		{
+		if (demandDetailsById == null) {
 			return "ErrorPages/ErrorPage";
 		}
 		model.addAttribute("demandDetails", demandDetailsById);
@@ -124,6 +124,28 @@ public class DemandController {
 	public String deleteAllClosedDemands() {
 		demandService.deleteAllClosedDemands();
 		return "redirect:/allDemands";
+	}
+
+	@GetMapping("/carrers")
+	public String showAllDemands(Model model) {
+		List<DemandMaster> allDemands = demandService.getAllDemands();
+
+		if (allDemands.isEmpty()) {
+			model.addAttribute("errorMessage", "No Demands Available.");
+			return "Carrer/CarrerPage";
+		}
+
+		model.addAttribute("allDemands", allDemands);
+		return "Carrer/CarrerPage";
+	}
+
+	@GetMapping("/carrer/apply/{demandId}")
+	public String showApplicationForm(@PathVariable("demandId") String demandId, Model model) {
+
+		DemandMaster demand = demandService.getDemandDetailsById(Integer.parseInt(demandId));
+		model.addAttribute("demands", demand);
+		model.addAttribute("candidate", new CandidateMaster());
+		return "Candidate/newCandidate";
 	}
 
 }
